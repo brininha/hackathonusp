@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial Pesquisa</title>
+    
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style-search.css">
+</head>
+<body>
+
+    <div class="app-container">
+        <div class="tutorial-screen search-bg">
+            
+            <div class="search-home-screen" id="search-home-screen">
+                <div class="search-logo">
+                    <span>C</span><span>o</span><span>n</span><span>e</span><span>c</span><span>t</span><span>a</span>
+                </div>
+                <div class="search-bar-container">
+                    <input type="text" class="search-input" id="target-input" placeholder="Digite aqui...">
+                    <button class="search-button" id="target-search-button">🔍</button>
+                </div>
+            </div>
+
+            <div class="results-screen" id="results-screen">
+                <header class="results-header">
+                    <a href="#" id="back-button">←</a>
+                    <input type="text" id="results-search-bar" readonly>
+                </header>
+                
+                <div class="results-list">
+                    <div class="result-item">
+                        <p class="result-url">receitas.com.br</p>
+                        <h3 class="result-title">Receita de Bolo de Chocolate Fofinho</h3>
+                        <p class="result-desc">A melhor receita de bolo de chocolate que você já viu! Simples, rápido e muito fofinho. Perfeito para o café da tarde.</p>
+                    </div>
+                    <div class="result-item">
+                        <p class="result-url">tudogostoso.com.br</p>
+                        <h3 class="result-title">Bolo de Cenoura com Cobertura</h3>
+                        <p class="result-desc">Encontre aqui a receita de bolo de cenoura mais famosa, com uma cobertura de chocolate que derrete na boca.</p>
+                    </div>
+                    <div class="result-item">
+                        <p class="result-url">wikipedia.org</p>
+                        <h3 class="result-title">Bolo - Wikipédia, a enciclopédia livre</h3>
+                        <p class="result-desc">Um bolo é um alimento de massa doce, frequentemente com recheio ou cobertura. A história do bolo remonta à antiguidade...</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="help-popup" id="popup-1" style="display: block; top: 250px;">
+                <span class="popup-close">X</span>
+                <p>Bem-vindo ao treino de Pesquisa! 🔍</p>
+                <p>Para começar, **clique na barra de pesquisa** onde diz "Digite aqui...".</p>
+            </div>
+
+            <div class="help-popup" id="popup-2" style="top: 250px;">
+                <span class="popup-close">X</span>
+                <p>Muito bem!</p>
+                <p>Agora, **digite o que você quer procurar** (ex: "receita de bolo") e **clique no botão azul (🔍)** para pesquisar.</p>
+            </div>
+
+            <div class="help-popup" id="popup-3" style="top: 150px;">
+                <span class="popup-close">X</span>
+                <p>Aqui estão seus resultados! 📄</p>
+                <p>Cada item é um site. Você pode ler o **título em azul** e a **descrição em cinza** para ver qual é o melhor.</p>
+                <button onclick="proximaEtapa('popup-4')">Entendido!</button>
+            </div>
+
+            <div class="help-popup" id="popup-4" style="top: 200px;">
+                <span class="popup-close">X</span>
+                <p>Tutorial Concluído! ✅</p>
+                <p>Você aprendeu a fazer uma pesquisa. Lembre-se de clicar nos títulos azuis para visitar os sites.</p>
+                <button onclick="window.location.href='index.html'">Voltar ao Menu</button>
+            </div>
+            
+        </div>
+    </div>
+
+    <script>
+        // --- Pegando todos os elementos ---
+        const searchHomeScreen = document.getElementById('search-home-screen');
+        const resultsScreen = document.getElementById('results-screen');
+        const targetInput = document.getElementById('target-input');
+        const targetSearchButton = document.getElementById('target-search-button');
+        const backButton = document.getElementById('back-button');
+        const resultsSearchBar = document.getElementById('results-search-bar');
+
+        // --- Função Helper: Controla os Popups ---
+        function proximaEtapa(idDoProximoPopup) {
+            document.querySelectorAll('.help-popup').forEach(popup => {
+                popup.style.display = 'none';
+            });
+            if (idDoProximoPopup) {
+                document.getElementById(idDoProximoPopup).style.display = 'block';
+            }
+        }
+
+        // --- LÓGICA DO TUTORIAL ---
+
+        // ETAPA 1: Clicar na barra de pesquisa
+        targetInput.addEventListener('click', function() {
+            proximaEtapa('popup-2');
+        });
+
+        // ETAPA 2: Clicar no botão de pesquisar
+        targetSearchButton.addEventListener('click', function() {
+            const query = targetInput.value;
+            
+            // Validação simples
+            if (query.trim() === '') {
+                 alert('Por favor, digite algo para pesquisar!');
+                 return;
+            }
+            
+            // Esconde a tela inicial e mostra os resultados
+            searchHomeScreen.style.display = 'none';
+            resultsScreen.style.display = 'flex';
+            
+            // Coloca o texto pesquisado na barra de resultados
+            resultsSearchBar.value = query;
+            targetInput.blur(); // Esconde o teclado
+            
+            // Mostra o popup de resultados
+            proximaEtapa('popup-3');
+        });
+
+        // Botão de Voltar (na tela de resultados)
+        backButton.addEventListener('click', function(e) {
+            e.preventDefault(); // Impede o link de fazer o #
+            
+            // Esconde os resultados e volta para a home
+            resultsScreen.style.display = 'none';
+            searchHomeScreen.style.display = 'flex';
+            
+            // Limpa o campo de busca
+            targetInput.value = '';
+            
+            proximaEtapa('popup-1');
+        });
+
+        // Inicia o tutorial
+        document.addEventListener('DOMContentLoaded', function() {
+            proximaEtapa('popup-1');
+
+            // Adiciona a funcionalidade de fechar em todos os botões 'X'
+            document.querySelectorAll('.popup-close').forEach(button => {
+                button.addEventListener('click', function() {
+                    this.parentElement.style.display = 'none';
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

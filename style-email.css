@@ -1,0 +1,160 @@
+/* --- ESTILOS DO TUTORIAL DE E-MAIL --- */
+
+.tutorial-screen.email-bg {
+    background-color: #f6f8fc; /* Fundo do Gmail */
+}
+
+/* --- TELA DA CAIXA DE ENTRADA --- */
+.inbox-screen {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: white;
+}
+
+.email-header {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: #ffffff;
+    border-bottom: 1px solid #ddd;
+    color: #5f6368;
+}
+
+.email-header a {
+    color: #5f6368;
+    text-decoration: none;
+    font-size: 1.5em;
+    margin-right: 20px;
+}
+
+.email-header h4 {
+    margin: 0;
+    font-size: 1.4em;
+}
+
+.email-list {
+    padding-top: 10px;
+}
+
+.email-item {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid #eee;
+    cursor: default; /* Não é clicável no nosso tutorial */
+}
+
+.email-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #007bff;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-right: 15px;
+}
+
+.email-details {
+    flex-grow: 1;
+}
+
+.email-details h4 {
+    margin: 0;
+    font-size: 1em;
+    color: #202124;
+}
+
+.email-details p {
+    margin: 0;
+    color: #5f6368;
+    font-size: 0.9em;
+}
+
+/* Botão Flutuante de Compor */
+.compose-button {
+    position: absolute;
+    bottom: 25px;
+    right: 25px;
+    background-color: #fff;
+    color: #d93025; /* Cor vermelha do Google */
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5em;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    cursor: pointer;
+    z-index: 50;
+}
+
+/* --- TELA DE COMPOSIÇÃO --- */
+.compose-screen {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    /* Começa fora da tela (embaixo) */
+    transform: translateY(100%); 
+    transition: transform 0.3s ease-out;
+    z-index: 60;
+}
+
+.compose-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.compose-header a {
+    color: #5f6368;
+    text-decoration: none;
+    font-size: 1.8em;
+}
+
+.send-button {
+    background: none;
+    border: none;
+    color: #007bff; /* Azul para "enviar" */
+    font-size: 1.8em;
+    cursor: pointer;
+}
+
+.compose-field {
+    padding: 12px 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.compose-field input {
+    width: 100%;
+    border: none;
+    outline: none;
+    font-size: 1em;
+    background: none;
+}
+
+.compose-body {
+    flex-grow: 1;
+    padding: 15px;
+}
+
+.compose-body textarea {
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    font-size: 1em;
+    resize: none;
+    background: none;
+}
