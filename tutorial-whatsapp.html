@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial WhatsApp</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style-whatsapp.css">
+</head>
+<body>
+
+    <div class="app-container">
+        <div class="tutorial-screen whatsapp-bg">
+            
+            <div class="chat-list-screen" id="chat-list-screen">
+                 <header class="tutorial-header">
+                    <a href="index.html">←</a>
+                    <h4>Conversas</h4>
+                </header>
+                <div class="whatsapp-chat-list">
+                    <div class="chat-item" id="target-contato">
+                        <img src="https://via.placeholder.com/50/FFC300/000000?Text=M" alt="Foto">
+                        <div class="chat-info">
+                            <h4>Maria (Filha)</h4>
+                            <p>Clique aqui para começar!</p>
+                        </div>
+                    </div>
+                    <div class="chat-item">
+                        <img src="https://via.placeholder.com/50/4CAF50/FFFFFF?Text=F" alt="Foto">
+                        <div class="chat-info">
+                            <h4>Grupo da Família</h4>
+                            <p>Fulano: Foto</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chat-screen" id="chat-screen">
+                 <header class="tutorial-header" style="background-color: #075E54;">
+                    <a href="#" id="back-button" style="font-size: 1.5em;">←</a>
+                    <img src="https://via.placeholder.com/50/FFC300/000000?Text=M" alt="Foto" style="width:40px; height:40px; border-radius: 50%; margin-right: 10px;">
+                    <h4 style="margin:0;">Maria (Filha)</h4>
+                </header>
+                <div class="chat-history" id="chat-history"></div>
+                <div class="chat-input-bar">
+                    <input type="text" class="chat-input" id="target-input" placeholder="Digite uma mensagem">
+                    <button class="send-button hidden" id="target-send">➤</button>
+                </div>
+            </div>
+
+            <div class="help-popup" id="popup-1" style="top: 150px; display: block;">
+                <span class="popup-close">X</span>
+                <p>Bem-vindo ao treino! 👋</p>
+                <p>Para enviar uma mensagem, primeiro, **clique no contato** que você quer conversar. Vamos tentar com a "Maria (Filha)".</p>
+            </div>
+
+            <div class="help-popup" id="popup-2" style="top: 40%;">
+                <span class="popup-close">X</span>
+                <p>Ótimo! Esta é a tela de conversa.</p>
+                <p>Agora, **clique na caixa de texto** (onde diz "Digite uma mensagem") para o teclado do seu celular aparecer.</p>
+            </div>
+
+            <div class="help-popup" id="popup-3" style="top: 20%;">
+                <span class="popup-close">X</span>
+                <p>Excelente!</p>
+                <p>O teclado real apareceu. **Digite uma mensagem** (como "Olá!") e **clique no botão verde (➤)** para enviar.</p>
+            </div>
+
+            <div class="help-popup" id="popup-4" style="top: 20%;">
+                <span class="popup-close">X</span>
+                <p>Parabéns! 🥳</p>
+                <p>Você enviou sua primeira mensagem. Veja como ela aparece na tela.</p>
+                <p>Vamos esperar a Maria responder...</p>
+                <button onclick="proximaEtapa(null)">Ok!</button>
+            </div>
+
+            <div class="help-popup" id="popup-5" style="top: 30%;">
+                <span class="popup-close">X</span>
+                <p>Tutorial Concluído! ✅</p>
+                <p>Veja! A Maria respondeu. Você aprendeu a enviar e receber mensagens. Continue praticando!</p>
+                <button onclick="window.location.href='index.html'">Voltar ao Menu</button>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // --- Pegando todos os elementos ---
+        const chatListScreen = document.getElementById('chat-list-screen');
+        const chatScreen = document.getElementById('chat-screen');
+        const chatHistory = document.getElementById('chat-history');
+        const targetContato = document.getElementById('target-contato');
+        const targetInput = document.getElementById('target-input');
+        const targetSend = document.getElementById('target-send');
+        const backButton = document.getElementById('back-button');
+
+        // --- Função Helper: Controla os Popups ---
+        function proximaEtapa(idDoProximoPopup) {
+            document.querySelectorAll('.help-popup').forEach(popup => {
+                popup.style.display = 'none';
+            });
+            if (idDoProximoPopup) {
+                document.getElementById(idDoProximoPopup).style.display = 'block';
+            }
+        }
+
+        // --- Função Helper: Cria Bolhas de Chat ---
+        function criarBolhaDeChat(texto, tipo) {
+            const bolha = document.createElement('div');
+            bolha.classList.add('chat-bubble', tipo === 'sent' ? 'bubble-sent' : 'bubble-received');
+            bolha.textContent = texto; 
+            chatHistory.appendChild(bolha);
+            chatHistory.scrollTop = chatHistory.scrollHeight;
+        }
+
+        // --- LÓGICA DO TUTORIAL ---
+
+        // ETAPA 1: Clicar no Contato
+        targetContato.addEventListener('click', function() {
+            chatListScreen.style.transform = 'translateX(-100%)';
+            chatScreen.style.transform = 'translateX(0)';
+            proximaEtapa('popup-2');
+        });
+
+        // ETAPA 2: Clicar na Caixa de Texto
+        targetInput.addEventListener('click', function() {
+            targetSend.classList.remove('hidden');
+            proximaEtapa('popup-3');
+        });
+
+        // ETAPA 3: Clicar em Enviar
+        targetSend.addEventListener('click', function() {
+            const texto = targetInput.value;
+            if (texto.trim() !== '') {
+                criarBolhaDeChat(texto, 'sent');
+                targetInput.value = '';
+                targetSend.classList.add('hidden');
+                targetInput.blur();
+                proximaEtapa('popup-4');
+                setTimeout(function() {
+                    const respostaMsg = `Oi! Tudo bem?`;
+                    criarBolhaDeChat(respostaMsg, 'received');
+                    setTimeout(function() {
+                        proximaEtapa('popup-5');
+                    }, 1000); 
+                }, 2000); 
+            }
+        });
+
+        // --- Botões Extras ---
+        backButton.addEventListener('click', function() {
+            chatListScreen.style.transform = 'translateX(0)';
+            chatScreen.style.transform = 'translateX(100%)';
+            chatHistory.innerHTML = '';
+            targetInput.value = '';
+            proximaEtapa('popup-1');
+        });
+
+        // Inicia o tutorial (mostra o primeiro popup)
+        document.addEventListener('DOMContentLoaded', function() {
+            proximaEtapa('popup-1');
+
+            // --- NOVO BLOCO ---
+            // Adiciona a funcionalidade de fechar em todos os botões 'X'
+            document.querySelectorAll('.popup-close').forEach(button => {
+                button.addEventListener('click', function() {
+                    this.parentElement.style.display = 'none';
+                });
+            });
+            // --- FIM DO NOVO BLOCO ---
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,109 @@
+/* --- ESTILOS DO TUTORIAL DO WHATSAPP --- */
+
+/* Fundo de tela do WhatsApp */
+.tutorial-screen.whatsapp-bg {
+    background-color: #E5DDD5;
+}
+
+/* Tela da Lista de Chats */
+.chat-list-screen {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: white;
+    transition: transform 0.3s ease-out;
+}
+
+.tutorial-header {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    background-color: #075E54; /* Cor do cabeçalho do WhatsApp */
+    color: white;
+}
+
+.tutorial-header h4 { margin: 0; font-size: 1.2em; }
+.tutorial-header a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.5em;
+    margin-right: 15px;
+}
+
+.whatsapp-chat-list { padding: 10px 0; }
+.chat-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+}
+.chat-item:hover { background-color: #f5f5f5; }
+.chat-item img { width: 50px; height: 50px; border-radius: 50%; margin-right: 15px; }
+.chat-info { flex-grow: 1; }
+.chat-info h4 { margin: 0; }
+.chat-info p { margin: 0; color: #777; }
+
+/* Tela de Conversa */
+.chat-screen {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    transform: translateX(100%); /* Começa fora da tela */
+    transition: transform 0.3s ease-out;
+}
+
+.chat-history {
+    flex-grow: 1;
+    padding: 15px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.chat-bubble {
+    padding: 8px 12px;
+    border-radius: 8px;
+    max-width: 75%;
+    line-height: 1.4;
+    word-wrap: break-word; /* Garante que a mensagem do usuário quebre a linha */
+}
+
+.bubble-sent {
+    background-color: #DCF8C6; /* Verde do WhatsApp */
+    align-self: flex-end; /* Alinha à direita */
+}
+
+.bubble-received {
+    background-color: #FFFFFF; /* Branco */
+    align-self: flex-start; /* Alinha à esquerda */
+}
+
+/* Barra de Digitação Falsa */
+.chat-input-bar {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: #f0f0f0;
+}
+.chat-input {
+    flex-grow: 1;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 20px;
+    background-color: white;
+}
+.send-button {
+    background-color: #075E54;
+    color: white;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    margin-left: 10px;
+    cursor: pointer;
+}

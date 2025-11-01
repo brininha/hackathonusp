@@ -19,7 +19,7 @@ body {
     border: 8px solid #333;
     border-radius: 30px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    overflow-y: auto; /* Permite rolar se o conteúdo for maior */
+    overflow: hidden; /* Importante para as telas deslizarem */
     position: relative;
 }
 
@@ -65,34 +65,12 @@ body {
 .search { background-color: #4285F4; }
 .disabled { background-color: #aaa; opacity: 0.7; }
 
-
-/* --- TELAS DE TUTORIAL (ex: tutorial-whatsapp.html) --- */
+/* --- ESTILO BASE DAS TELAS DE TUTORIAL --- */
 .tutorial-screen {
     width: 100%;
     height: 100%;
     position: relative;
-}
-
-.tutorial-header {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    background-color: #075E54; /* Cor do cabeçalho do WhatsApp */
-    color: white;
-}
-
-.tutorial-header img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    margin-right: 10px;
-}
-
-.tutorial-header a {
-    color: white;
-    text-decoration: none;
-    font-size: 1.5em;
-    margin-right: 10px;
+    background-color: #fafafa; /* Um fundo padrão neutro */
 }
 
 /* --- O SIMULADOR DA IA (Pop-ups de ajuda) --- */
@@ -104,18 +82,20 @@ body {
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.3);
     z-index: 100;
-    width: 80%;
+    width: 90%;
     left: 50%;
     transform: translateX(-50%);
     border: 2px solid #007bff;
-    /* Começa escondido. O JS vai mostrar */
-    display: none; 
+    display: none; /* Começa escondido */
 }
 
 .help-popup p {
-    margin: 0;
+    margin: 0 0 10px 0;
     font-size: 1.1em;
     line-height: 1.5;
+}
+.help-popup p strong {
+    color: #58a6ff; /* Azul para destacar */
 }
 
 .help-popup button {
@@ -131,7 +111,22 @@ body {
     cursor: pointer;
 }
 
-/* Esconde elementos, usado pelo JS */
+/* --- ESTILO DO BOTÃO DE FECHAR O POPUP (NOVO) --- */
+.popup-close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #aaa;
+    cursor: pointer;
+    line-height: 1; /* Para alinhar o 'X' perfeitamente */
+}
+.popup-close:hover {
+    color: white;
+}
+
+/* --- CLASSES DE CONTROLE --- */
 .hidden {
     display: none !important;
 }
