@@ -25,7 +25,25 @@ body {
     background-color: #243a69; /* Cor principal */
     color: white;
     padding: 30px 20px 20px;
-    text-align: center;
+    
+    /* MUDANÇA: Usando Flexbox para centralizar */
+    display: flex;
+    flex-direction: column; /* Organiza os itens em coluna */
+    align-items: center;   /* Centraliza horizontalmente */
+}
+
+/* NOVO: Estilo para a logo dentro do header */
+.app-header img {
+    width: 180px;  /* Ajuste este valor para o tamanho da sua logo */
+    height: auto;  /* Mantém a proporção */
+    margin-bottom: 10px; /* Espaço entre a logo e o parágrafo */
+}
+
+/* NOVO: Regra para o parágrafo no header */
+.app-header p {
+    margin: 0; /* Remove margens padrão do parágrafo */
+    font-size: 1.1em;
+    opacity: 0.9;
 }
 
 .app-menu {
@@ -43,8 +61,14 @@ body {
     font-weight: 500;
     color: black;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    border: 1px solid rgba(0, 0, 0, 0.03);
     transition: transform 0.2s;
 }
+
+.menu-button img {
+    margin: 15px;
+}
+
 .menu-button:hover {
     transform: scale(1.03);
 }
