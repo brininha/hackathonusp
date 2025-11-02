@@ -68,7 +68,7 @@ body {
     box-shadow: 0 4px 10px rgba(0,0,0,0.08); /* Sombra suave */
     transition: transform 0.2s; /* Efeito ao clicar */
     text-decoration: none;
-    font-size: 1.1em;
+    font-size: 1.8em;
     font-weight: 500;
     /* Cor do texto dentro do botão */
     color: #333333;
@@ -80,9 +80,9 @@ body {
 /* Regra para a imagem (logo) dentro do botão */
 .menu-button img,
 .menu-button span { /* Para funcionar com <img> e <span> */
-    width: 30px;
-    height: 30px;
-    margin-right: 15px;
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
 }
 
 
