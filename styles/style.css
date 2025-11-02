@@ -1,6 +1,9 @@
 /* --- CONFIGURAÇÕES GLOBAIS --- */
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     min-height: 100vh;
     box-sizing: border-box;
     margin: 0;
@@ -11,14 +14,10 @@ body {
 .app-container {
     width: 100%;
     max-width: 400px; /* Largura de um celular */
+    height: 800px;
     background-color: #f3f3f3;
-    overflow: scroll; 
+    overflow: hidden; 
     position: relative;
-    margin: 0 auto; /* Sua correção anterior */
-    
-    /* ADICIONADO: */
-    display: flex;
-    flex-direction: column; 
 }
 
 /* --- TELA PRINCIPAL (index.html) --- */
@@ -49,10 +48,6 @@ body {
 
 .app-menu {
     padding: 20px 15px;
-
-    /* ADICIONADO: */
-    flex: 1; /* Faz o menu ocupar o espaço disponível */
-    overflow-y: auto; /* Permite rolar o menu se for muito grande */
 }
 
 .app-menu h2 {
