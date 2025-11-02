@@ -12,11 +12,9 @@
     <div class="app-container">
         <div class="tutorial-screen whatsapp-bg">
             
-            <!-- TELA 1: LISTA DE CONVERSAS -->
-            <div class="chat-list-screen" id="chat-list-screen">
+            <!-- TELA 1: LISTA DE CONVERSAS --><div class="chat-list-screen" id="chat-list-screen">
                  <header class="tutorial-header">
-                    <!-- Botão voltar para o menu-whatsapp -->
-                    <a href="menu-whatsapp.html">←</a>
+                    <!-- Botão voltar para o menu-whatsapp --><a href="menu-whatsapp.html">←</a>
                     <h4>Conversas</h4>
                 </header>
                 <div class="whatsapp-chat-list">
@@ -31,37 +29,34 @@
                         <img src="perfil.png" alt="Foto">
                         <div class="chat-info">
                             <h4>Grupo da Família</h4>
-                            <p>Você não pode ligar para grupos.</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- TELA 2: TELA DE CONVERSA -->
-            <div class="chat-screen" id="chat-screen">
+            <!-- TELA 2: TELA DE CONVERSA --><div class="chat-screen" id="chat-screen">
                  <header class="tutorial-header" style="background-color: #075E54;">
                     <a href="#" id="back-button" style="font-size: 1.5em;">←</a>
                     <img src="perfil.png" alt="Foto" style="width:40px; height:40px; border-radius: 50%; margin-right: 10px;">
-                    <!-- flex-grow: 1 para empurrar os ícones para a direita -->
                     <h4 style="margin:0; flex-grow: 1;">Maria (Filha)</h4>
                     
-                    <!-- ÍCONES DE LIGAÇÃO -->
-                    <div class="chat-header-icons">
-                        
-                        <button class="header-icon-button" id="target-call-button">📞</button>
-                        <button class="header-icon-button" style="font-size: 1.8em;">⋮</button>
+                    <!-- ÍCONES DE LIGAÇÃO E TRÊS PONTOS - AGORA SÃO IMAGENS --><div class="chat-header-icons">
+                        <button class="header-icon-button" id="target-call-button">
+                            <img src="telefone.png" alt="Ícone de Ligação" style="width: 30px;">
+                        </button>
+                        <button class="header-icon-button">
+                            <img src="3pontos.png" alt="Ícone de Mais Opções">
+                        </button>
                     </div>
                 </header>
-                <!-- Apenas para preencher espaço, o usuário não vai interagir aqui -->
-                <div class="chat-history" id="chat-history"></div>
+                <!-- Apenas para preencher espaço, o usuário não vai interagir aqui --><div class="chat-history" id="chat-history"></div>
                 <div class="chat-input-bar">
                     <input type="text" class="chat-input" placeholder="Digite uma mensagem" readonly>
                     <button class="send-button" style="opacity: 0.5;">➤</button>
                 </div>
             </div>
 
-            <!-- TELA 3: TELA DE LIGAÇÃO -->
-            <div class="call-screen" id="call-screen">
+            <!-- TELA 3: TELA DE LIGAÇÃO --><div class="call-screen" id="call-screen">
                 <div class="call-info">
                     <img src="perfil.png" alt="Foto de Perfil">
                     <h2>Maria (Filha)</h2>
@@ -69,13 +64,13 @@
                 </div>
                 <div class="call-actions">
                     <button class="end-call-button" id="target-end-call-button">
-                        <span>&#128222;</span> <!-- Ícone de telefone -->
+                        <!-- ÍCONE DE TELEFONE DIMINUÍDO DE 40px PARA 30px -->
+                        <img src="telefone.png" alt="Ícone de Telefone" style="width: 30px; height: 30px; filter: invert(100%) rotate(-135deg);">
                     </button>
                 </div>
             </div>
 
-            <!-- POPUPS DE AJUDA -->
-            <div class="help-popup" id="popup-1" style="top: 150px; display: block;">
+            <!-- POPUPS DE AJUDA --><div class="help-popup" id="popup-1" style="top: 150px; display: block;">
                 <span class="popup-close">X</span>
                 <p>Bem-vindo ao treino de Ligação! 📞</p>
                 <p>Primeiro, **clique no contato** para quem você quer ligar. Vamos tentar a **"Maria (Filha)"**.</p>
@@ -84,7 +79,7 @@
             <div class="help-popup" id="popup-2" style="top: 150px;">
                 <span class="popup-close">X</span>
                 <p>Ótimo! Esta é a tela de conversa.</p>
-                <p>Para fazer uma ligação, **clique no ícone de telefone (📞)** no canto superior direito.</p>
+                <p>Para fazer uma ligação, **clique no ícone de telefone** no canto superior direito.</p>
             </div>
 
             <div class="help-popup" id="popup-3" style="top: 50%; transform: translate(-50%, -50%);">
@@ -97,7 +92,7 @@
             <div class="help-popup" id="popup-4" style="bottom: 180px; top: auto;">
                 <span class="popup-close">X</span>
                 <p>A chamada está em andamento!</p>
-                <p>Para desligar, **clique no botão vermelho (📞)** na parte de baixo.</p>
+                <p>Para desligar, **clique no botão vermelho** na parte de baixo.</p>
             </div>
 
             <div class="help-popup" id="popup-5" style="top: 30%;">
@@ -114,12 +109,12 @@
         // --- Pegando todos os elementos ---
         const chatListScreen = document.getElementById('chat-list-screen');
         const chatScreen = document.getElementById('chat-screen');
-        const callScreen = document.getElementById('call-screen'); // Nova tela
+        const callScreen = document.getElementById('call-screen'); 
         const targetContato = document.getElementById('target-contato');
-        const targetCallButton = document.getElementById('target-call-button'); // Novo botão
-        const targetEndCallButton = document.getElementById('target-end-call-button'); // Novo botão
+        const targetCallButton = document.getElementById('target-call-button');
+        const targetEndCallButton = document.getElementById('target-end-call-button');
         const backButton = document.getElementById('back-button');
-        const callStatus = document.getElementById('call-status'); // Novo status
+        const callStatus = document.getElementById('call-status');
 
         // --- Função Helper: Controla os Popups ---
         function proximaEtapa(idDoProximoPopup) {
@@ -140,41 +135,61 @@
             proximaEtapa('popup-2');
         });
 
-        // ETAPA 2: Clicar no Botão de Ligar (📞)
+        // ETAPA 2: Clicar no Botão de Ligar (telefone.png)
         targetCallButton.addEventListener('click', function() {
             chatScreen.style.transform = 'translateX(-100%)'; // Esconde a tela de chat
-            callScreen.style.transform = 'translateX(0)'; // Mostra a tela de ligação
+            callScreen.classList.add('active'); // CORREÇÃO: Adiciona a classe 'active' para mostrar a tela de ligação
             proximaEtapa('popup-3');
 
             // Simula a chamada sendo atendida
+            let segundos = 0;
+            let callInterval;
+
+            const startCallTimer = () => {
+                // Limpa o intervalo anterior, se houver
+                if (callInterval) clearInterval(callInterval);
+                
+                callInterval = setInterval(() => {
+                    segundos++;
+                    const min = String(Math.floor(segundos / 60)).padStart(2, '0');
+                    const sec = String(segundos % 60).padStart(2, '0');
+                    callStatus.textContent = `${min}:${sec}`;
+                }, 1000);
+            };
+            
+            callStatus.textContent = 'Chamando...'; // Garante que começa com "Chamando..."
+            
             setTimeout(function() {
-                callStatus.textContent = '00:01';
-            }, 2000);
+                callStatus.textContent = '00:00'; // Simula que atendeu
+                startCallTimer(); // Inicia o contador
+            }, 3000); // 3 segundos para a pessoa "atender"
+
             setTimeout(function() {
-                callStatus.textContent = '00:02';
-            }, 3000);
-            setTimeout(function() {
-                callStatus.textContent = '00:03';
-                if(document.getElementById('popup-3').style.display === 'none') {
+                // Se o popup 3 ainda estiver visível, significa que o usuário não clicou "Entendi"
+                // Então, mostramos o popup 4 para instruir a desligar.
+                if(document.getElementById('popup-3').style.display !== 'none') {
                     proximaEtapa('popup-4');
                 }
-            }, 4000);
+            }, 6000); // 6 segundos após clicar para ligar
         });
 
         // ETAPA 3: Clicar em Desligar (Botão Vermelho)
         targetEndCallButton.addEventListener('click', function() {
+            // Limpa o contador da ligação
+            clearInterval(callInterval); 
             callStatus.textContent = 'Chamada finalizada';
             
-            // Espera um segundo para mostrar "Chamada finalizada"
+            // Espera um pouco para mostrar "Chamada finalizada"
             setTimeout(function() {
-                // Volta para a lista de conversas
-                callScreen.style.transform = 'translateX(100%)';
+                // Volta para a lista de conversas e esconde a tela de ligação
+                callScreen.classList.remove('active'); // CORREÇÃO: Remove a classe 'active' para esconder
                 chatListScreen.style.transform = 'translateX(0)';
-                chatScreen.style.transform = 'translateX(100%)'; // Reseta a tela de chat
+                chatScreen.style.transform = 'translateX(100%)'; 
                 
                 proximaEtapa('popup-5');
                 
-                // Reseta o status para a próxima vez
+                // Reseta o status para a próxima vez (para quando o tutorial for refeito)
+                segundos = 0; // Reseta os segundos
                 setTimeout(() => { callStatus.textContent = 'Chamando...'; }, 500);
             }, 1500);
         });
@@ -203,3 +218,4 @@
 
 </body>
 </html>
+
