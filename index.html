@@ -18,6 +18,17 @@
         <img src="images/logo.png" alt="Logo">
     </div>
 
+    <!-- NOVO OVERLAY DE BOAS-VINDAS -->
+    <div id="welcome-overlay">
+        <!-- POPUP DE BOAS-VINDAS MOVIDO PARA CÁ -->
+        <div class="help-popup" id="popup-boas-vindas" style="display: none; top: 25%;">
+            <p>Bem-vindo ao <strong>Eu + Digital</strong>! 👋</p>
+            <p>Nós vamos te ajudar a aprender a usar os aplicativos mais importantes do dia a dia, passo a passo.</p>
+            <p>Para começar, <strong>clique em um dos botões</strong> abaixo (como WhatsApp, Banco, etc.) para ver os tutoriais disponíveis.</p>
+            <button id="btn-entendi">Entendi!</button>
+        </div>
+    </div>
+
     <div class="app-container" id="main-content" style="display: none;">
         
         <header class="app-header">
@@ -49,6 +60,8 @@
             </a>
         </main>
 
+        <!-- POPUP FOI MOVIDO PARA O OVERLAY ACIMA -->
+
     </div>
 
     <script>
@@ -58,19 +71,33 @@
             // Pega os elementos
             const loader = document.getElementById('loader-container');
             const mainContent = document.getElementById('main-content');
+            const welcomeOverlay = document.getElementById('welcome-overlay'); // Pega o overlay
+            const popupBoasVindas = document.getElementById('popup-boas-vindas');
+            const btnEntendi = document.getElementById('btn-entendi');
         
-            // Simula um tempo de carregamento (ex: 2.5 segundos)
+            // Simula um tempo de carregamento (ex: 1 segundo)
             setTimeout(function() {
                 
                 // Esconde a tela de carregamento
                 loader.style.display = 'none';
         
-                // Mostra o conteúdo principal do app
+                // Mostra o conteúdo principal do app (ficará atrás do overlay)
                 mainContent.style.display = 'block'; 
 
-            }, 1000); // 2500ms = 2.5 segundos. Ajuste este valor se quiser.
+                // MOSTRA O OVERLAY E O POPUP
+                welcomeOverlay.style.display = 'block'; // Mostra o fundo branco
+                popupBoasVindas.style.display = 'block'; // Mostra o popup
+
+            }, 1000); // 1000ms = 1 segundo.
+
+            // Adiciona a ação para o botão "Entendi!"
+            btnEntendi.addEventListener('click', function() {
+                welcomeOverlay.style.display = 'none'; // Esconde o fundo branco
+                popupBoasVindas.style.display = 'none'; // Esconde o popup
+            });
         });
     </script>
 
 </body>
 </html>
+
