@@ -234,3 +234,47 @@ body {
     z-index: 200; /* Acima do main-content */
     display: none; /* Começa escondido */
 }
+
+/* --- ESTILOS DOS BOTÕES DO POPUP --- */
+
+/* Um container para alinhar os botões */
+.popup-actions {
+    display: flex;
+    gap: 10px; /* Espaço entre os botões */
+    margin-top: 20px;
+}
+
+/* Vamos re-estilizar o botão padrão do popup 
+  para ele se tornar o botão "Entendi!" (Primário)
+*/
+.help-popup button.popup-button-primary {
+    flex-grow: 1; /* Faz os botões dividirem o espaço */
+    padding: 12px;
+    margin-top: 0; /* Remove a margem antiga */
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Novo estilo para o botão "Ouvir" (Secundário)
+  Ele será transparente com uma borda
+*/
+.help-popup button.popup-button-secondary {
+    flex-grow: 1;
+    padding: 12px;
+    margin-top: 0;
+    background-color: transparent;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+}
+.help-popup button.popup-button-secondary:hover {
+    background-color: rgba(255,255,255, 0.1); /* Efeito sutil */
+}
