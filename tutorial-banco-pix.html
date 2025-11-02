@@ -7,6 +7,11 @@
     
     <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="styles/style-banco.css">
+    <style>
+        body {
+            background-color: #0073B1;
+        }
+    </style>
 </head>
 <body>
 
@@ -21,15 +26,15 @@
                 <div class="banco-grid-menu" style="padding: 20px;">
                     <a href="#" class="banco-menu-button" id="target-tipo-chave">
                         <span>🔑</span>
-                        Enviar com Chave
+                        Enviar com chave
                     </a>
                     <a href="#" class="banco-menu-button">
                         <span>📋</span>
-                        Pix Copia e Cola
+                        Pix copia e cola
                     </a>
                     <a href="#" class="banco-menu-button">
                         <span>📱</span>
-                        Minhas Chaves
+                        Minhas chaves
                     </a>
                     <a href="#" class="banco-menu-button">
                         <span>...</span>
@@ -41,7 +46,7 @@
             <div class="banco-screen payment-flow" id="screen-pix-chave">
                 <header class="banco-header">
                     <a href="#" class="back-button" data-target="screen-pix-home">←</a>
-                    <h4>Enviar com Chave</h4>
+                    <h4>Enviar com chave</h4>
                 </header>
                 <div class="banco-content">
                     <h2>Qual o tipo de chave?</h2>
@@ -71,7 +76,7 @@
             <div class="banco-screen payment-flow" id="screen-pix-confirmar">
                 <header class="banco-header">
                     <a href="#" class="back-button" data-target="screen-pix-valor">←</a>
-                    <h4>Confirmar Dados</h4>
+                    <h4>Confirmar dados</h4>
                 </header>
                 <div class="banco-content">
                     <h2>Revise os dados do Pix</h2>
@@ -86,44 +91,44 @@
 
             <div class="banco-screen payment-flow" id="screen-pix-sucesso">
                 <header class="banco-header">
-                    <h4>Pix Enviado</h4>
+                    <h4>Pix enviado</h4>
                 </header>
                 <div class="banco-content" style="text-align: center; padding-top: 60px;">
                     <span style="font-size: 5em; color: #34A853;">✅</span>
                     <h2 style="margin-top: 20px;">Pix enviado com sucesso!</h2>
                     <p>O valor de <strong id="valor-sucesso"></strong> foi enviado para Maria S.</p>
-                    <a href="menu-banco.html" class="banco-button-primary">Voltar ao Menu</a>
+                    <a href="menu-banco.html" class="banco-button-primary">Voltar ao menu</a>
                 </div>
             </div>
 
             <div class="help-popup" id="popup-1" style="display: block; top: 150px;">
                 <span class="popup-close">X</span>
                 <p>Bem-vindo ao treino de Pix! ↔️</p>
-                <p>Vamos enviar um Pix usando uma chave. **Clique em 'Enviar com Chave'**.</p>
+                <p>Vamos enviar um Pix usando uma chave. <b>Clique em 'Enviar com chave'</b>.</p>
             </div>
 
             <div class="help-popup" id="popup-2" style="top: 150px;">
                 <span class="popup-close">X</span>
                 <p>Ótimo! Agora, escolha o tipo de chave.</p>
-                <p>Para este treino, **clique em 'Celular'**.</p>
+                <p>Para este treino, <b>clique em 'Celular'</b>.</p>
             </div>
 
             <div class="help-popup" id="popup-3" style="top: 200px;">
                 <span class="popup-close">X</span>
                 <p>Agora, digite o valor que deseja enviar.</p>
-                <p>Para este treino, **digite "25"** e **clique em 'Continuar'**.</p>
+                <p>Para este treino, <b>digite "25"</b> e <b>clique em 'Continuar'</b>.</p>
             </div>
 
             <div class="help-popup" id="popup-4" style="top: 150px;">
                 <span class="popup-close">X</span>
                 <p>Confira sempre para quem está enviando!</p>
-                <p>Se os dados estiverem corretos, **clique em 'Confirmar e Enviar'**.</p>
+                <p>Se os dados estiverem corretos, <b>clique em 'Confirmar e enviar'</b>.</p>
             </div>
             
             <div class="help-popup" id="popup-5" style="top: 150px;">
                 <span class="popup-close">X</span>
                 <p>Tutorial Concluído! ✅</p>
-                <p>Você aprendeu a fazer um Pix! Clique em "Voltar ao Menu" para sair.</p>
+                <p>Você aprendeu a fazer um Pix! Clique em "Voltar ao menu" para sair.</p>
             </div>
 
         </div>
