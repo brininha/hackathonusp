@@ -7,6 +7,12 @@
     
     <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="styles/style-banco.css">
+    <style>
+        body {
+            background-color: #0073B1;
+        }
+    </style>
+    
 </head>
 <body>
 
@@ -14,9 +20,9 @@
         <div class="tutorial-screen banco-bg">
             
             <div class="banco-screen active" id="screen-home">
-                <header class="banco-header" style="background: none; color: #0073B1;">
-                    <a href="menu-banco.html" style="color: #0073B1;">←</a>
-                    <h4>Meu Banco</h4>
+                <header class="banco-header">
+                    <a href="menu-banco.html">←</a>
+                    <h4>Meu banco</h4>
                 </header>
                 <div class="banco-home-content">
                     <div class="balance-card">
@@ -52,11 +58,11 @@
                 <div class="banco-grid-menu" style="padding: 20px;">
                     <a href="#" class="banco-menu-button" id="target-digitar-codigo">
                         <span>⌨️</span>
-                        Digitar Código
+                        Digitar código
                     </a>
                     <a href="#" class="banco-menu-button">
                         <span>📷</span>
-                        Ler Cód. Barras
+                        Ler cód. barras
                     </a>
                 </div>
             </div>
@@ -64,12 +70,12 @@
             <div class="banco-screen payment-flow" id="screen-digitar">
                 <header class="banco-header">
                     <a href="#" class="back-button" data-target="screen-pagar">←</a>
-                    <h4>Digitar Código</h4>
+                    <h4>Digitar código</h4>
                 </header>
                 <div class="banco-content">
                     <h2>Digite o código de barras</h2>
                     <div class="form-group">
-                        <label for="boleto-code">Código de Barras</label>
+                        <label for="boleto-code">Código de barras</label>
                         <input type="text" id="boleto-code" value="12345.67890 00000.000000 ..." readonly>
                     </div>
                     <a href="#" class="banco-button-primary" id="target-continuar">Continuar</a>
@@ -79,14 +85,14 @@
             <div class="banco-screen payment-flow" id="screen-confirmar">
                 <header class="banco-header">
                     <a href="#" class="back-button" data-target="screen-digitar">←</a>
-                    <h4>Confirmar Pagamento</h4>
+                    <h4>Confirmar pagamento</h4>
                 </header>
                 <div class="banco-content">
                     <h2>Revise os dados</h2>
                     <p><strong>Valor:</strong> R$ 50,00</p>
                     <p><strong>Vencimento:</strong> Hoje</p>
                     <p><strong>Beneficiário:</strong> Empresa de Luz S.A.</p>
-                    <a href="#" class="banco-button-primary" id="target-confirmar">Confirmar Pagamento</a>
+                    <a href="#" class="banco-button-primary" id="target-confirmar">Confirmar pagamento</a>
                 </div>
             </div>
 
@@ -96,41 +102,41 @@
                 </header>
                 <div class="banco-content" style="text-align: center; padding-top: 60px;">
                     <span style="font-size: 5em; color: #34A853;">✅</span>
-                    <h2 style="margin-top: 20px;">Pagamento Realizado!</h2>
+                    <h2 style="margin-top: 20px;">Pagamento realizado!</h2>
                     <p>Seu boleto foi pago com sucesso.</p>
-                    <a href="menu-banco.html" class="banco-button-primary">Voltar ao Menu</a>
+                    <a href="menu-banco.html" class="banco-button-primary">Voltar ao menu</a>
                 </div>
             </div>
 
 
             <div class="help-popup" id="popup-1" style="display: block; top: 150px;">
                 <span class="popup-close">X</span>
-                <p>Bem-vindo ao treino do Banco! 🏦</p>
-                <p>Vamos aprender a pagar uma conta. **Clique no botão 'Pagamentos'**.</p>
+                <p>Bem-vindo ao treino do banco! 🏦</p>
+                <p>Vamos aprender a pagar uma conta. <b>Clique no botão 'Pagamentos'</b>.</p>
             </div>
 
             <div class="help-popup" id="popup-2" style="top: 150px;">
                 <span class="popup-close">X</span>
                 <p>Ótimo!</p>
-                <p>Agora, **clique em 'Digitar Código'** para inserir o número do boleto.</p>
+                <p>Agora, <b>clique em 'Digitar código'</b> para inserir o número do boleto.</p>
             </div>
 
             <div class="help-popup" id="popup-3" style="top: 200px;">
                 <span class="popup-close">X</span>
                 <p>Perfeito!</p>
-                <p>Para este treino, o número já foi preenchido. **Clique em 'Continuar'**.</p>
+                <p>Para este treino, o número já foi preenchido. <b>Clique em 'Continuar'</b>.</p>
             </div>
 
             <div class="help-popup" id="popup-4" style="top: 250px;">
                 <span class="popup-close">X</span>
                 <p>Sempre verifique o valor e o vencimento!</p>
-                <p>Se tudo estiver certo, **clique em 'Confirmar Pagamento'**.</p>
+                <p>Se tudo estiver certo, <b>clique em 'Confirmar pagamento'</b>.</p>
             </div>
 
             <div class="help-popup" id="popup-5" style="top: 150px;">
                 <span class="popup-close">X</span>
-                <p>Tutorial Concluído! ✅</p>
-                <p>Você aprendeu a pagar uma conta com segurança. Clique em "Voltar ao Menu" para sair.</p>
+                <p>Tutorial concluído! ✅</p>
+                <p>Você aprendeu a pagar uma conta com segurança. Clique em "Voltar ao menu" para sair.</p>
             </div>
 
         </div>
