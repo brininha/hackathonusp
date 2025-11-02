@@ -15,7 +15,7 @@ body {
     width: 100%;
     max-width: 400px; /* Largura de um celular */
     height: 800px;
-    background-color: #f3f3f3;
+    background-color: #f5f5f5;
     overflow: hidden; 
     position: relative;
 }
@@ -34,9 +34,9 @@ body {
 
 /* NOVO: Estilo para a logo dentro do header */
 .app-header img {
-    width: 200px;  /* Ajuste este valor para o tamanho da sua logo */
+    width: 250px;  /* Ajuste este valor para o tamanho da sua logo */
     height: auto;  /* Mantém a proporção */
-    margin-bottom: 10px; /* Espaço entre a logo e o parágrafo */
+    margin-bottom: 40px; /* Espaço entre a logo e o parágrafo */
 }
 
 /* NOVO: Regra para o parágrafo no header */
@@ -55,14 +55,15 @@ body {
     /* Centraliza o título */
     text-align: center; 
     color: #333; /* Um pouco mais suave que preto puro */
-    font-size: 1.3em;
+    font-size: 1.5em;
     margin-bottom: 25px; /* Mais espaço abaixo do título */
 }
 
 .menu-button {
     display: flex;         /* Para alinhar o logo e o texto */
     align-items: center;   /* Centraliza verticalmente */
-    background-color: white;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgba(0, 0, 0, 0.05);
     padding: 15px;         /* Espaço interno */
     margin-bottom: 15px;   /* Espaço entre botões (do Passo 2) */
     border-radius: 12px;
