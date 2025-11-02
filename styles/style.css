@@ -6,7 +6,7 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    padding: 20px;
+    padding: 0px;
     box-sizing: border-box;
 }
 
@@ -58,7 +58,7 @@ body {
 .whatsapp { background-color: #e3ffed; }
 .banco { background-color: #0073B1; }
 .email { background-color: #EA4335; }
-.search { background-color: #4285F4; }
+.search { background-color: #c8c8c8; }
 .disabled { background-color: #aaa; opacity: 0.7; }
 
 /* --- ESTILO BASE DAS TELAS DE TUTORIAL --- */
@@ -127,7 +127,8 @@ body {
 }
 
 .logo{
-    width: 30px;
+    width: 40px;
+    padding-right: 10px;
 }
 
 .header-back-button {
@@ -136,7 +137,7 @@ body {
     left: 25px;
     color: white;
     text-decoration: none;
-    font-size: 2em;
+    font-size: 0.8em;
     font-weight: 600;
 }
 .header-back-button:hover {
@@ -207,4 +208,15 @@ body {
     margin: 0; /* Remove margens padrão do parágrafo */
     font-size: 1.1em;
     opacity: 0.9;
+}
+
+.seta-volta {
+    display: flex;
+    flex-direction: row;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
