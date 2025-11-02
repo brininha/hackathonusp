@@ -42,8 +42,9 @@ body {
 /* NOVO: Regra para o parágrafo no header */
 .app-header p {
     margin: 0; /* Remove margens padrão do parágrafo */
-    font-size: 1.1em;
+    font-size: 1.3em;
     opacity: 0.9;
+    text-align: center;
 }
 
 .app-menu {
@@ -54,7 +55,7 @@ body {
     /* Centraliza o título */
     text-align: center; 
     color: #333; /* Um pouco mais suave que preto puro */
-    font-size: 1.4em;
+    font-size: 1.3em;
     margin-bottom: 25px; /* Mais espaço abaixo do título */
 }
 
