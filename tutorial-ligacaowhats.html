@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial Ligação WhatsApp</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style-whatsapp.css">
+</head>
+<body>
+
+    <div class="app-container">
+        <div class="tutorial-screen whatsapp-bg">
+            
+            <!-- TELA 1: LISTA DE CONVERSAS -->
+            <div class="chat-list-screen" id="chat-list-screen">
+                 <header class="tutorial-header">
+                    <!-- Botão voltar para o menu-whatsapp -->
+                    <a href="menu-whatsapp.html">←</a>
+                    <h4>Conversas</h4>
+                </header>
+                <div class="whatsapp-chat-list">
+                    <div class="chat-item" id="target-contato">
+                        <img src="perfil.png" alt="Foto">
+                        <div class="chat-info">
+                            <h4>Maria (Filha)</h4>
+                            <p>Clique aqui para ligar!</p>
+                        </div>
+                    </div>
+                    <div class="chat-item">
+                        <img src="perfil.png" alt="Foto">
+                        <div class="chat-info">
+                            <h4>Grupo da Família</h4>
+                            <p>Você não pode ligar para grupos.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TELA 2: TELA DE CONVERSA -->
+            <div class="chat-screen" id="chat-screen">
+                 <header class="tutorial-header" style="background-color: #075E54;">
+                    <a href="#" id="back-button" style="font-size: 1.5em;">←</a>
+                    <img src="perfil.png" alt="Foto" style="width:40px; height:40px; border-radius: 50%; margin-right: 10px;">
+                    <!-- flex-grow: 1 para empurrar os ícones para a direita -->
+                    <h4 style="margin:0; flex-grow: 1;">Maria (Filha)</h4>
+                    
+                    <!-- ÍCONES DE LIGAÇÃO -->
+                    <div class="chat-header-icons">
+                        
+                        <button class="header-icon-button" id="target-call-button">📞</button>
+                        <button class="header-icon-button" style="font-size: 1.8em;">⋮</button>
+                    </div>
+                </header>
+                <!-- Apenas para preencher espaço, o usuário não vai interagir aqui -->
+                <div class="chat-history" id="chat-history"></div>
+                <div class="chat-input-bar">
+                    <input type="text" class="chat-input" placeholder="Digite uma mensagem" readonly>
+                    <button class="send-button" style="opacity: 0.5;">➤</button>
+                </div>
+            </div>
+
+            <!-- TELA 3: TELA DE LIGAÇÃO -->
+            <div class="call-screen" id="call-screen">
+                <div class="call-info">
+                    <img src="perfil.png" alt="Foto de Perfil">
+                    <h2>Maria (Filha)</h2>
+                    <p id="call-status">Chamando...</p>
+                </div>
+                <div class="call-actions">
+                    <button class="end-call-button" id="target-end-call-button">
+                        <span>&#128222;</span> <!-- Ícone de telefone -->
+                    </button>
+                </div>
+            </div>
+
+            <!-- POPUPS DE AJUDA -->
+            <div class="help-popup" id="popup-1" style="top: 150px; display: block;">
+                <span class="popup-close">X</span>
+                <p>Bem-vindo ao treino de Ligação! 📞</p>
+                <p>Primeiro, **clique no contato** para quem você quer ligar. Vamos tentar a **"Maria (Filha)"**.</p>
+            </div>
+
+            <div class="help-popup" id="popup-2" style="top: 150px;">
+                <span class="popup-close">X</span>
+                <p>Ótimo! Esta é a tela de conversa.</p>
+                <p>Para fazer uma ligação, **clique no ícone de telefone (📞)** no canto superior direito.</p>
+            </div>
+
+            <div class="help-popup" id="popup-3" style="top: 50%; transform: translate(-50%, -50%);">
+                <span class="popup-close">X</span>
+                <p>Perfeito! A ligação está começando.</p>
+                <p>Você verá "Chamando..." e, quando a pessoa atender, o tempo começará a contar.</p>
+                <button onclick="proximaEtapa('popup-4')">Entendi!</button>
+            </div>
+
+            <div class="help-popup" id="popup-4" style="bottom: 180px; top: auto;">
+                <span class="popup-close">X</span>
+                <p>A chamada está em andamento!</p>
+                <p>Para desligar, **clique no botão vermelho (📞)** na parte de baixo.</p>
+            </div>
+
+            <div class="help-popup" id="popup-5" style="top: 30%;">
+                <span class="popup-close">X</span>
+                <p>Tutorial Concluído! ✅</p>
+                <p>Você aprendeu a fazer e a desligar uma chamada. Muito bem!</p>
+                <button onclick="window.location.href='menu-whatsapp.html'">Voltar ao Menu</button>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // --- Pegando todos os elementos ---
+        const chatListScreen = document.getElementById('chat-list-screen');
+        const chatScreen = document.getElementById('chat-screen');
+        const callScreen = document.getElementById('call-screen'); // Nova tela
+        const targetContato = document.getElementById('target-contato');
+        const targetCallButton = document.getElementById('target-call-button'); // Novo botão
+        const targetEndCallButton = document.getElementById('target-end-call-button'); // Novo botão
+        const backButton = document.getElementById('back-button');
+        const callStatus = document.getElementById('call-status'); // Novo status
+
+        // --- Função Helper: Controla os Popups ---
+        function proximaEtapa(idDoProximoPopup) {
+            document.querySelectorAll('.help-popup').forEach(popup => {
+                popup.style.display = 'none';
+            });
+            if (idDoProximoPopup) {
+                document.getElementById(idDoProximoPopup).style.display = 'block';
+            }
+        }
+
+        // --- LÓGICA DO TUTORIAL ---
+
+        // ETAPA 1: Clicar no Contato
+        targetContato.addEventListener('click', function() {
+            chatListScreen.style.transform = 'translateX(-100%)';
+            chatScreen.style.transform = 'translateX(0)';
+            proximaEtapa('popup-2');
+        });
+
+        // ETAPA 2: Clicar no Botão de Ligar (📞)
+        targetCallButton.addEventListener('click', function() {
+            chatScreen.style.transform = 'translateX(-100%)'; // Esconde a tela de chat
+            callScreen.style.transform = 'translateX(0)'; // Mostra a tela de ligação
+            proximaEtapa('popup-3');
+
+            // Simula a chamada sendo atendida
+            setTimeout(function() {
+                callStatus.textContent = '00:01';
+            }, 2000);
+            setTimeout(function() {
+                callStatus.textContent = '00:02';
+            }, 3000);
+            setTimeout(function() {
+                callStatus.textContent = '00:03';
+                if(document.getElementById('popup-3').style.display === 'none') {
+                    proximaEtapa('popup-4');
+                }
+            }, 4000);
+        });
+
+        // ETAPA 3: Clicar em Desligar (Botão Vermelho)
+        targetEndCallButton.addEventListener('click', function() {
+            callStatus.textContent = 'Chamada finalizada';
+            
+            // Espera um segundo para mostrar "Chamada finalizada"
+            setTimeout(function() {
+                // Volta para a lista de conversas
+                callScreen.style.transform = 'translateX(100%)';
+                chatListScreen.style.transform = 'translateX(0)';
+                chatScreen.style.transform = 'translateX(100%)'; // Reseta a tela de chat
+                
+                proximaEtapa('popup-5');
+                
+                // Reseta o status para a próxima vez
+                setTimeout(() => { callStatus.textContent = 'Chamando...'; }, 500);
+            }, 1500);
+        });
+
+        // --- Botões Extras ---
+        // Volta da tela de chat para a lista
+        backButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            chatScreen.style.transform = 'translateX(100%)';
+            chatListScreen.style.transform = 'translateX(0)';
+            proximaEtapa('popup-1');
+        });
+
+        // Inicia o tutorial
+        document.addEventListener('DOMContentLoaded', function() {
+            proximaEtapa('popup-1');
+
+            // Adiciona a funcionalidade de fechar em todos os botões 'X'
+            document.querySelectorAll('.popup-close').forEach(button => {
+                button.addEventListener('click', function() {
+                    this.parentElement.style.display = 'none';
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
