@@ -21,10 +21,15 @@
 
     <div id="welcome-overlay">
         <div class="help-popup" id="popup-boas-vindas" style="display: none; top: 25%;">
+            <span class="popup-close">X</span>
             <p>Bem-vindo ao <strong>Eu + Digital</strong>! 👋</p>
             <p>Nós vamos te ajudar a aprender a usar os aplicativos mais importantes do dia a dia, passo a passo.</p>
-            <p>Para começar, <strong>clique em um dos botões</strong> abaixo (como WhatsApp, Banco, etc.) para ver os tutoriais disponíveis.</p>
-            <button id="btn-entendi">Entendi!</button>
+            <p>Para começar, <strong>clique em um dos botões</strong> a seguir (como WhatsApp, Banco, etc.) para ver os tutoriais disponíveis.</p>
+            
+            <div class="popup-actions">
+                <button id="btn-ouvir-agora" class="popup-button-secondary">🔊 Ouvir</button>
+                <button id="btn-entendi" class="popup-button-primary">Entendi!</button>
+            </div>
         </div>
     </div>
 
@@ -40,38 +45,52 @@
             
             <a href="menu-whatsapp.html" class="menu-button whatsapp">
                 <img src="images/whatsapp.png" alt="Logo do WhatsApp" class="logo">
-                Aprenda a usar o WhatsApp
+                WhatsApp
             </a>
 
             <a href="menu-banco.html" class="menu-button banco">
                 <img src="images/banco.png" alt="Ilustração de banco" class="logo">
-                Aprenda a fazer operações bancárias
+                App de banco
             </a>
 
             <a href="menu-email.html" class="menu-button email">
                 <img src="images/gmail.png" alt="Logo do Gmail" class="logo">
-                Aprenda a usar o Gmail
+                Gmail
             </a>
 
             <a href="menu-search.html" class="menu-button search">
                 <img src="images/google.png" alt="Logo do Google" class="logo">
-                Aprenda a pesquisar no Google
+                Google
             </a>
         </main>
 
     </div>
 
     <script>
+        
+        /* --- FUNÇÃO DE FALA (Não mudou) --- */
+        function falarTexto(texto) {
+            window.speechSynthesis.cancel(); 
+            const utterance = new SpeechSynthesisUtterance(texto);
+            utterance.lang = 'pt-BR';
+            window.speechSynthesis.speak(utterance); 
+        }
+
+        /* --- LÓGICA PRINCIPAL DA PÁGINA --- */
         document.addEventListener('DOMContentLoaded', function() {
             
             const loader = document.getElementById('loader-container');
             const mainContent = document.getElementById('main-content');
             const welcomeOverlay = document.getElementById('welcome-overlay'); 
             const popupBoasVindas = document.getElementById('popup-boas-vindas');
-            const btnEntendi = document.getElementById('btn-entendi');
             
-            // --- NOSSA NOVA LÓGICA ---
-            // 1. Define um nome (chave) para guardar no localStorage
+            // Nossos dois botões do popup
+            const btnEntendi = document.getElementById('btn-entendi');
+            const btnOuvir = document.getElementById('btn-ouvir-agora'); // NOVO
+            
+            // Botão 'X' 
+            const btnClose = popupBoasVindas.querySelector('.popup-close');
+            
             const storageKey = 'jaViuBoasVindas';
 
             setTimeout(function() {
@@ -79,24 +98,41 @@
                 loader.style.display = 'none';
                 mainContent.style.display = 'block'; 
 
-                // 2. Verifica se a chave NÃO existe no localStorage
                 if (localStorage.getItem(storageKey) === null) {
-                    // Se não existe (é a primeira visita), mostra o popup
                     welcomeOverlay.style.display = 'block'; 
                     popupBoasVindas.style.display = 'block'; 
+                    // NÃO falamos mais nada automaticamente
                 }
-                // Se a chave *já existe*, o código termina aqui e o popup não aparece.
+            }, 1000); 
 
-            }, 1000); // 1000ms = 1 segundo.
+            // --- NOVAS AÇÕES DOS BOTÕES ---
 
-            // Adiciona a ação para o botão "Entendi!"
-            btnEntendi.addEventListener('click', function() {
+            // AÇÃO 1: O usuário clica em "Ouvir"
+            btnOuvir.addEventListener('click', function() {
+                let textoParaFalar = "";
+                // Pega o texto dos 3 parágrafos do popup
+                popupBoasVindas.querySelectorAll('p').forEach(paragrafo => {
+                    textoParaFalar += paragrafo.innerText + " "; 
+                });
+                // Chama a função de falar
+                falarTexto(textoParaFalar);
+            });
+
+            // Função para fechar o popup
+            function fecharPopup() {
                 welcomeOverlay.style.display = 'none'; 
                 popupBoasVindas.style.display = 'none'; 
-
-                // 3. CRIA a chave no localStorage ao clicar em "Entendi!"
                 localStorage.setItem(storageKey, 'true');
-            });
+                window.speechSynthesis.cancel(); // Para a fala
+            }
+
+            // AÇÃO 2: O usuário clica em "Entendi!"
+            btnEntendi.addEventListener('click', fecharPopup);
+
+            // AÇÃO 3: O usuário clica no "X"
+            if (btnClose) {
+                btnClose.addEventListener('click', fecharPopup);
+            }
         });
     </script>
 
