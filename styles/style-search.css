@@ -14,7 +14,7 @@
     flex-direction: column;
     align-items: center;
     padding-top: 100px;
-    box-sizing: border-box; /* Para o padding funcionar bem */
+    box-sizing: border-box; 
 }
 
 .search-logo {
@@ -23,7 +23,6 @@
     color: #007bff;
     margin-bottom: 30px;
 }
-/* Cores do logo "Conecta" */
 .search-logo span:nth-child(1) { color: #4285F4; } /* C */
 .search-logo span:nth-child(2) { color: #EA4335; } /* o */
 .search-logo span:nth-child(3) { color: #FBBC05; } /* n */
@@ -69,8 +68,7 @@
     background: #ffffff;
     display: flex;
     flex-direction: column;
-    /* Começa escondido */
-    display: none; 
+    display: none; /* Começa escondido */
 }
 
 .results-header {
@@ -115,7 +113,7 @@
 
 .result-title {
     font-size: 1.2em;
-    color: #1a0dab; /* Azul clássico de link */
+    color: #1a0dab; 
     font-weight: 500;
     margin: 2px 0;
 }
@@ -130,7 +128,7 @@
 .mic-button {
     background: none;
     border: none;
-    font-size: 1.5em; /* Tamanho do ícone */
+    font-size: 1.5em; 
     color: #5f6368;
     cursor: pointer;
     padding: 0 10px;
@@ -145,19 +143,17 @@
     width: 100%;
     height: 100%;
     background-color: rgba(0,0,0,0.85);
-    z-index: 110; /* Acima dos popups normais */
+    z-index: 110; 
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     color: white;
-    /* Começa escondido */
-    display: none;
+    display: none; /* Começa escondido */
 }
 
 .voice-search-overlay span {
-    font-size: 5em; /* Ícone de microfone gigante */
-    /* Animação de "pulsar" */
+    font-size: 5em; 
     animation: pulse 1.5s infinite;
 }
 

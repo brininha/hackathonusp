@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial App de Banco - Pix</title>
+    
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/style-banco.css">
+</head>
+<body>
+
+    <div class="app-container">
+        <div class="tutorial-screen banco-bg">
+            
+            <div class="banco-screen active" id="screen-pix-home">
+                <header class="banco-header">
+                    <a href="menu-banco.html">←</a>
+                    <h4>Área Pix</h4>
+                </header>
+                <div class="banco-grid-menu" style="padding: 20px;">
+                    <a href="#" class="banco-menu-button" id="target-tipo-chave">
+                        <span>🔑</span>
+                        Enviar com Chave
+                    </a>
+                    <a href="#" class="banco-menu-button">
+                        <span>📋</span>
+                        Pix Copia e Cola
+                    </a>
+                    <a href="#" class="banco-menu-button">
+                        <span>📱</span>
+                        Minhas Chaves
+                    </a>
+                    <a href="#" class="banco-menu-button">
+                        <span>...</span>
+                        Outros
+                    </a>
+                </div>
+            </div>
+
+            <div class="banco-screen payment-flow" id="screen-pix-chave">
+                <header class="banco-header">
+                    <a href="#" class="back-button" data-target="screen-pix-home">←</a>
+                    <h4>Enviar com Chave</h4>
+                </header>
+                <div class="banco-content">
+                    <h2>Qual o tipo de chave?</h2>
+                    <div class="banco-grid-menu" style="grid-template-columns: 1fr 1fr; margin-top: 10px;">
+                        <a href="#" class="banco-menu-button" id="target-celular">Celular</a>
+                        <a href="#" class="banco-menu-button">CPF/CNPJ</a>
+                        <a href="#" class="banco-menu-button">E-mail</a>
+                        <a href="#" class="banco-menu-button">Aleatória</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="banco-screen payment-flow" id="screen-pix-valor">
+                <header class="banco-header">
+                    <a href="#" class="back-button" data-target="screen-pix-chave">←</a>
+                    <h4>Valor</h4>
+                </header>
+                <div class="banco-content">
+                    <h2>Qual o valor da transferência?</h2>
+                    <div class="form-group" style="margin-top: 30px;">
+                        <input type="text" id="target-valor" class="input-valor" placeholder="R$ 0,00">
+                    </div>
+                    <a href="#" class="banco-button-primary" id="target-continuar-valor">Continuar</a>
+                </div>
+            </div>
+
+            <div class="banco-screen payment-flow" id="screen-pix-confirmar">
+                <header class="banco-header">
+                    <a href="#" class="back-button" data-target="screen-pix-valor">←</a>
+                    <h4>Confirmar Dados</h4>
+                </header>
+                <div class="banco-content">
+                    <h2>Revise os dados do Pix</h2>
+                    <div class="confirmation-details">
+                        <p><strong>Valor:</strong> <span id="valor-final"></span></p>
+                        <p><strong>Para:</strong> Maria S. (Instituição Falsa)</p>
+                        <p><strong>Chave:</strong> (11) 98765-4321</p>
+                    </div>
+                    <a href="#" class="banco-button-primary" id="target-confirmar-pix">Confirmar e Enviar</a>
+                </div>
+            </div>
+
+            <div class="banco-screen payment-flow" id="screen-pix-sucesso">
+                <header class="banco-header">
+                    <h4>Pix Enviado</h4>
+                </header>
+                <div class="banco-content" style="text-align: center; padding-top: 60px;">
+                    <span style="font-size: 5em; color: #34A853;">✅</span>
+                    <h2 style="margin-top: 20px;">Pix enviado com sucesso!</h2>
+                    <p>O valor de <strong id="valor-sucesso"></strong> foi enviado para Maria S.</p>
+                    <a href="menu-banco.html" class="banco-button-primary">Voltar ao Menu</a>
+                </div>
+            </div>
+
+            <div class="help-popup" id="popup-1" style="display: block; top: 150px;">
+                <span class="popup-close">X</span>
+                <p>Bem-vindo ao treino de Pix! ↔️</p>
+                <p>Vamos enviar um Pix usando uma chave. **Clique em 'Enviar com Chave'**.</p>
+            </div>
+
+            <div class="help-popup" id="popup-2" style="top: 150px;">
+                <span class="popup-close">X</span>
+                <p>Ótimo! Agora, escolha o tipo de chave.</p>
+                <p>Para este treino, **clique em 'Celular'**.</p>
+            </div>
+
+            <div class="help-popup" id="popup-3" style="top: 200px;">
+                <span class="popup-close">X</span>
+                <p>Agora, digite o valor que deseja enviar.</p>
+                <p>Para este treino, **digite "25"** e **clique em 'Continuar'**.</p>
+            </div>
+
+            <div class="help-popup" id="popup-4" style="top: 150px;">
+                <span class="popup-close">X</span>
+                <p>Confira sempre para quem está enviando!</p>
+                <p>Se os dados estiverem corretos, **clique em 'Confirmar e Enviar'**.</p>
+            </div>
+            
+            <div class="help-popup" id="popup-5" style="top: 150px;">
+                <span class="popup-close">X</span>
+                <p>Tutorial Concluído! ✅</p>
+                <p>Você aprendeu a fazer um Pix! Clique em "Voltar ao Menu" para sair.</p>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // --- Função Helper: Controla os Popups ---
+        function proximaEtapa(idDoProximoPopup) {
+            document.querySelectorAll('.help-popup').forEach(popup => {
+                popup.style.display = 'none';
+            });
+            if (idDoProximoPopup) {
+                document.getElementById(idDoProximoPopup).style.display = 'block';
+            }
+        }
+
+        // --- Função Helper: Controla as Telas ---
+        function irParaTela(idDaTela) {
+            document.querySelectorAll('.banco-screen').forEach(screen => {
+                screen.classList.remove('active');
+                screen.style.transform = 'translateX(100%)';
+            });
+            const telaAlvo = document.getElementById(idDaTela);
+            telaAlvo.classList.add('active');
+            telaAlvo.style.transform = 'translateX(0)';
+        }
+
+        // --- LÓGICA DO TUTORIAL ---
+
+        // ETAPA 1: Clicar em Enviar com Chave
+        document.getElementById('target-tipo-chave').addEventListener('click', function(e) {
+            e.preventDefault();
+            irParaTela('screen-pix-chave');
+            proximaEtapa('popup-2');
+        });
+
+        // ETAPA 2: Clicar em Celular
+        document.getElementById('target-celular').addEventListener('click', function(e) {
+            e.preventDefault();
+            irParaTela('screen-pix-valor');
+            proximaEtapa('popup-3');
+        });
+
+        // ETAPA 3: Clicar em Continuar (Valor)
+        document.getElementById('target-continuar-valor').addEventListener('click', function(e) {
+            e.preventDefault();
+            // Pega o valor ou usa "25" como padrão se estiver vazio
+            const valor = document.getElementById('target-valor').value || "25"; 
+            
+            // Formata o valor como R$ 25,00
+            const valorFormatado = "R$ " + parseFloat(valor).toFixed(2).replace('.', ',');
+            
+            // Atualiza o valor na tela de confirmação e sucesso
+            document.getElementById('valor-final').textContent = valorFormatado;
+            document.getElementById('valor-sucesso').textContent = valorFormatado;
+
+            irParaTela('screen-pix-confirmar');
+            proximaEtapa('popup-4');
+        });
+
+        // ETAPA 4: Clicar em Confirmar Pix
+        document.getElementById('target-confirmar-pix').addEventListener('click', function(e) {
+            e.preventDefault();
+            irParaTela('screen-pix-sucesso');
+            proximaEtapa('popup-5');
+        });
+
+
+        // --- Botões de Voltar ---
+        document.querySelectorAll('.back-button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const telaAlvoId = this.getAttribute('data-target');
+                irParaTela(telaAlvoId);
+                
+                // Lógica para mostrar o popup correto ao voltar
+                if (telaAlvoId === 'screen-pix-home') proximaEtapa('popup-1');
+                if (telaAlvoId === 'screen-pix-chave') proximaEtapa('popup-2');
+                if (telaAlvoId === 'screen-pix-valor') proximaEtapa('popup-3');
+            });
+        });
+
+        // Inicia o tutorial
+        document.addEventListener('DOMContentLoaded', function() {
+            irParaTela('screen-pix-home'); // Garante que a tela inicial esteja ativa
+            proximaEtapa('popup-1'); // Mostra o primeiro popup
+
+            // Adiciona a funcionalidade de fechar em todos os botões 'X'
+            document.querySelectorAll('.popup-close').forEach(button => {
+                button.addEventListener('click', function() {
+                    this.parentElement.style.display = 'none';
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

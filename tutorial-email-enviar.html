@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial - Enviar E-mail</title>
+    
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/style-email.css">
+</head>
+<body>
+
+    <div class="app-container">
+        <div class="tutorial-screen email-bg">
+            
+            <div class="inbox-screen" id="inbox-screen">
+                <header class="email-header">
+                    <a href="menu-email.html">←</a>
+                    <h4>Caixa de Entrada</h4>
+                </header>
+                
+                <div class="email-list">
+                    <div class="email-item">
+                        <div class="email-avatar" style="background-color: #d93025;">B</div>
+                        <div class="email-details">
+                            <h4>Banco Digital</h4>
+                            <p>Sua fatura de novembro chegou.</p>
+                        </div>
+                    </div>
+                    <div class="email-item">
+                        <div class="email-avatar" style="background-color: #1a73e8;">L</div>
+                        <div class="email-details">
+                            <h4>Loja Online</h4>
+                            <p>Confirmação do pedido 12345</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="compose-button" id="target-compose">
+                    <span>+</span>
+                </div>
+            </div>
+
+            <div class="compose-screen" id="compose-screen">
+                <header class="compose-header">
+                    <a href="#" id="back-button">←</a>
+                    <h4>Nova mensagem</h4>
+                    <button class="send-button" id="target-send">➤</button>
+                </header>
+                <div class="compose-field">
+                    <input type="text" placeholder="Para" id="email-to">
+                </div>
+                <div class="compose-field">
+                    <input type="text" placeholder="Assunto" id="email-subject">
+                </div>
+                <div class="compose-body">
+                    <textarea placeholder="Escrever e-mail" id="email-body"></textarea>
+                </div>
+            </div>
+
+            <div class="help-popup" id="popup-1" style="display: block;">
+                <span class="popup-close">X</span>
+                <p>Bem-vindo ao treino de E-mail! ✉️</p>
+                <p>Para escrever uma nova mensagem, **clique no botão '+'** para compor.</p>
+            </div>
+
+            <div class="help-popup" id="popup-2">
+                <span class="popup-close">X</span>
+                <p>Ótimo! Esta é a tela de composição.</p>
+                <p>Preencha os campos 'Para', 'Assunto' e escreva sua mensagem. Quando terminar, **clique no botão 'Enviar' (➤)** no topo.</p>
+            </div>
+
+            <div class="help-popup" id="popup-3">
+                <span class="popup-close">X</span>
+                <p>E-mail "Enviado" com Sucesso! 🚀</p>
+                <p>Você aprendeu o básico de como enviar um e-mail.</p>
+                <button onclick="window.location.href='menu-email.html'">Voltar ao Menu</button>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // --- Pegando todos os elementos ---
+        const inboxScreen = document.getElementById('inbox-screen');
+        const composeScreen = document.getElementById('compose-screen');
+        const targetCompose = document.getElementById('target-compose');
+        const targetSend = document.getElementById('target-send');
+        const backButton = document.getElementById('back-button');
+
+        // --- Função Helper: Popups ---
+        function proximaEtapa(idDoProximoPopup) {
+            document.querySelectorAll('.help-popup').forEach(popup => {
+                popup.style.display = 'none';
+            });
+            if (idDoProximoPopup) {
+                document.getElementById(idDoProximoPopup).style.display = 'block';
+            }
+        }
+
+        // --- LÓGICA DO TUTORIAL ---
+
+        // ETAPA 1: Clicar em Compor
+        targetCompose.addEventListener('click', function() {
+            composeScreen.style.transform = 'translateY(0)';
+            proximaEtapa('popup-2');
+        });
+
+        // ETAPA 2: Clicar em Enviar
+        targetSend.addEventListener('click', function() {
+            const emailTo = document.getElementById('email-to').value;
+            const emailBody = document.getElementById('email-body').value;
+            
+            if (emailTo.trim() === '' || emailBody.trim() === '') {
+                 alert('Por favor, preencha pelo menos o "Para" e o corpo da mensagem.');
+                 return;
+            }
+            
+            composeScreen.style.transform = 'translateY(100%)';
+            document.getElementById('email-to').value = '';
+            document.getElementById('email-subject').value = '';
+            document.getElementById('email-body').value = '';
+            
+            proximaEtapa('popup-3');
+        });
+
+        // Botão de Voltar (na tela de composição)
+        backButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            composeScreen.style.transform = 'translateY(100%)';
+            proximaEtapa('popup-1');
+        });
+
+        // Inicia o tutorial
+        document.addEventListener('DOMContentLoaded', function() {
+            proximaEtapa('popup-1');
+            document.querySelectorAll('.popup-close').forEach(button => {
+                button.addEventListener('click', function() {
+                    this.parentElement.style.display = 'none';
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

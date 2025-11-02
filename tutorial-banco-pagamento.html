@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial App de Banco</title>
+    
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/style-banco.css">
+</head>
+<body>
+
+    <div class="app-container">
+        <div class="tutorial-screen banco-bg">
+            
+            <div class="banco-screen active" id="screen-home">
+                <header class="banco-header" style="background: none; color: #0073B1;">
+                    <a href="menu-banco.html" style="color: #0073B1;">←</a>
+                    <h4>Meu Banco</h4>
+                </header>
+                <div class="banco-home-content">
+                    <div class="balance-card">
+                        <h3>Saldo em conta</h3>
+                        <p>R$ 1.250,30</p>
+                    </div>
+                    <div class="banco-grid-menu">
+                        <a href="#" class="banco-menu-button" id="target-pagar">
+                            <span>📄</span>
+                            Pagamentos
+                        </a>
+                        <a href="#" class="banco-menu-button">
+                            <span>↔️</span>
+                            Pix
+                        </a>
+                        <a href="#" class="banco-menu-button">
+                            <span>📊</span>
+                            Extrato
+                        </a>
+                        <a href="#" class="banco-menu-button">
+                            <span>...</span>
+                            Outros
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="banco-screen payment-flow" id="screen-pagar">
+                <header class="banco-header">
+                    <a href="#" class="back-button" data-target="screen-home">←</a>
+                    <h4>Pagamentos</h4>
+                </header>
+                <div class="banco-grid-menu" style="padding: 20px;">
+                    <a href="#" class="banco-menu-button" id="target-digitar-codigo">
+                        <span>⌨️</span>
+                        Digitar Código
+                    </a>
+                    <a href="#" class="banco-menu-button">
+                        <span>📷</span>
+                        Ler Cód. Barras
+                    </a>
+                </div>
+            </div>
+
+            <div class="banco-screen payment-flow" id="screen-digitar">
+                <header class="banco-header">
+                    <a href="#" class="back-button" data-target="screen-pagar">←</a>
+                    <h4>Digitar Código</h4>
+                </header>
+                <div class="banco-content">
+                    <h2>Digite o código de barras</h2>
+                    <div class="form-group">
+                        <label for="boleto-code">Código de Barras</label>
+                        <input type="text" id="boleto-code" value="12345.67890 00000.000000 ..." readonly>
+                    </div>
+                    <a href="#" class="banco-button-primary" id="target-continuar">Continuar</a>
+                </div>
+            </div>
+
+            <div class="banco-screen payment-flow" id="screen-confirmar">
+                <header class="banco-header">
+                    <a href="#" class="back-button" data-target="screen-digitar">←</a>
+                    <h4>Confirmar Pagamento</h4>
+                </header>
+                <div class="banco-content">
+                    <h2>Revise os dados</h2>
+                    <p><strong>Valor:</strong> R$ 50,00</p>
+                    <p><strong>Vencimento:</strong> Hoje</p>
+                    <p><strong>Beneficiário:</strong> Empresa de Luz S.A.</p>
+                    <a href="#" class="banco-button-primary" id="target-confirmar">Confirmar Pagamento</a>
+                </div>
+            </div>
+
+            <div class="banco-screen payment-flow" id="screen-sucesso">
+                <header class="banco-header">
+                    <h4>Pagamento</h4>
+                </header>
+                <div class="banco-content" style="text-align: center; padding-top: 60px;">
+                    <span style="font-size: 5em; color: #34A853;">✅</span>
+                    <h2 style="margin-top: 20px;">Pagamento Realizado!</h2>
+                    <p>Seu boleto foi pago com sucesso.</p>
+                    <a href="menu-banco.html" class="banco-button-primary">Voltar ao Menu</a>
+                </div>
+            </div>
+
+
+            <div class="help-popup" id="popup-1" style="display: block; top: 150px;">
+                <span class="popup-close">X</span>
+                <p>Bem-vindo ao treino do Banco! 🏦</p>
+                <p>Vamos aprender a pagar uma conta. **Clique no botão 'Pagamentos'**.</p>
+            </div>
+
+            <div class="help-popup" id="popup-2" style="top: 150px;">
+                <span class="popup-close">X</span>
+                <p>Ótimo!</p>
+                <p>Agora, **clique em 'Digitar Código'** para inserir o número do boleto.</p>
+            </div>
+
+            <div class="help-popup" id="popup-3" style="top: 200px;">
+                <span class="popup-close">X</span>
+                <p>Perfeito!</p>
+                <p>Para este treino, o número já foi preenchido. **Clique em 'Continuar'**.</p>
+            </div>
+
+            <div class="help-popup" id="popup-4" style="top: 250px;">
+                <span class="popup-close">X</span>
+                <p>Sempre verifique o valor e o vencimento!</p>
+                <p>Se tudo estiver certo, **clique em 'Confirmar Pagamento'**.</p>
+            </div>
+
+            <div class="help-popup" id="popup-5" style="top: 150px;">
+                <span class="popup-close">X</span>
+                <p>Tutorial Concluído! ✅</p>
+                <p>Você aprendeu a pagar uma conta com segurança. Clique em "Voltar ao Menu" para sair.</p>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // --- Função Helper: Controla os Popups ---
+        function proximaEtapa(idDoProximoPopup) {
+            document.querySelectorAll('.help-popup').forEach(popup => {
+                popup.style.display = 'none';
+            });
+            if (idDoProximoPopup) {
+                document.getElementById(idDoProximoPopup).style.display = 'block';
+            }
+        }
+
+        // --- Função Helper: Controla as Telas ---
+        function irParaTela(idDaTela) {
+            // Esconde todas as telas
+            document.querySelectorAll('.banco-screen').forEach(screen => {
+                screen.classList.remove('active'); // Remove a classe active
+                screen.style.transform = 'translateX(100%)';
+            });
+            // Mostra a tela específica
+            const telaAlvo = document.getElementById(idDaTela);
+            telaAlvo.classList.add('active'); // Adiciona active
+            telaAlvo.style.transform = 'translateX(0)';
+        }
+
+        // --- LÓGICA DO TUTORIAL ---
+
+        // ETAPA 1: Clicar em Pagar
+        document.getElementById('target-pagar').addEventListener('click', function(e) {
+            e.preventDefault();
+            irParaTela('screen-pagar');
+            proximaEtapa('popup-2');
+        });
+
+        // ETAPA 2: Clicar em Digitar Código
+        document.getElementById('target-digitar-codigo').addEventListener('click', function(e) {
+            e.preventDefault();
+            irParaTela('screen-digitar');
+            proximaEtapa('popup-3');
+        });
+
+        // ETAPA 3: Clicar em Continuar
+        document.getElementById('target-continuar').addEventListener('click', function(e) {
+            e.preventDefault();
+            irParaTela('screen-confirmar');
+            proximaEtapa('popup-4');
+        });
+
+        // ETAPA 4: Clicar em Confirmar
+        document.getElementById('target-confirmar').addEventListener('click', function(e) {
+            e.preventDefault();
+            irParaTela('screen-sucesso');
+            proximaEtapa('popup-5');
+        });
+
+
+        // --- Botões de Voltar ---
+        document.querySelectorAll('.back-button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const telaAlvoId = this.getAttribute('data-target');
+                irParaTela(telaAlvoId);
+                
+                // Lógica para mostrar o popup correto ao voltar
+                if (telaAlvoId === 'screen-home') proximaEtapa('popup-1');
+                if (telaAlvoId === 'screen-pagar') proximaEtapa('popup-2');
+                if (telaAlvoId === 'screen-digitar') proximaEtapa('popup-3');
+            });
+        });
+
+        // Inicia o tutorial
+        document.addEventListener('DOMContentLoaded', function() {
+            // Garante que a tela home seja a única visível no início
+            irParaTela('screen-home');
+            proximaEtapa('popup-1'); // Mostra o primeiro popup
+
+            // Adiciona a funcionalidade de fechar em todos os botões 'X'
+            document.querySelectorAll('.popup-close').forEach(button => {
+                button.addEventListener('click', function() {
+                    this.parentElement.style.display = 'none';
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial - Pesquisa por Texto</title>
+    
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/style-search.css">
+</head>
+<body>
+
+    <div class="app-container">
+        <div class="tutorial-screen search-bg">
+            
+            <div class="search-home-screen" id="search-home-screen">
+                <div class="search-logo">
+                    <span>C</span><span>o</span><span>n</span><span>e</span><span>c</span><span>t</span><span>a</span>
+                </div>
+                <div class="search-bar-container">
+                    <input type="text" class="search-input" id="target-input" placeholder="Digite aqui...">
+                    <button class="mic-button">🎤</button> <button class="search-button" id="target-search-button">🔍</button>
+                </div>
+            </div>
+
+            <div class="results-screen" id="results-screen">
+                <header class="results-header">
+                    <a href="#" id="back-button">←</a>
+                    <input type="text" id="results-search-bar" readonly>
+                </header>
+                <div class="results-list" id="results-list-container">
+                    </div>
+            </div>
+
+            <div class="help-popup" id="popup-1" style="display: block;">
+                <span class="popup-close">X</span>
+                <p>Bem-vindo ao treino de Pesquisa por Texto! ⌨️</p>
+                <p>Para começar, **clique na barra de pesquisa** onde diz "Digite aqui...".</p>
+            </div>
+
+            <div class="help-popup" id="popup-2">
+                <span class="popup-close">X</span>
+                <p>Muito bem!</p>
+                <p>Para este treino, **digite "receita de bolo"** e **clique no botão azul (🔍)** para pesquisar.</p>
+            </div>
+
+            <div class="help-popup" id="popup-3">
+                <span class="popup-close">X</span>
+                <p>Aqui estão seus resultados! 📄</p>
+                <p>Cada item é um site. Leia o **título em azul** e a **descrição em cinza** para decidir qual clicar.</p>
+                <button onclick="proximaEtapa('popup-4')">Entendido!</button>
+            </div>
+
+            <div class="help-popup" id="popup-4">
+                <span class="popup-close">X</span>
+                <p>Tutorial Concluído! ✅</p>
+                <p>Você aprendeu a pesquisar por texto. **Clique no '←'** para voltar ou no botão abaixo.</p>
+                <button onclick="window.location.href='menu-search.html'">Voltar ao Menu</button>
+            </div>
+            
+        </div>
+    </div>
+
+    <script>
+        // --- Pegando elementos ---
+        const searchHomeScreen = document.getElementById('search-home-screen');
+        const resultsScreen = document.getElementById('results-screen');
+        const targetInput = document.getElementById('target-input');
+        const targetSearchButton = document.getElementById('target-search-button');
+        const backButton = document.getElementById('back-button');
+        const resultsSearchBar = document.getElementById('results-search-bar');
+        const resultsListContainer = document.getElementById('results-list-container');
+
+        // --- Resultados Falsos ---
+        const fakeResultsHTML = `<div class="result-item"><p class="result-url">receitas.com.br</p><h3 class="result-title">Receita de Bolo de Chocolate</h3><p class="result-desc">A melhor receita de bolo de chocolate...</p></div> <div class="result-item"><p class="result-url">tudogostoso.com.br</p><h3 class="result-title">Bolo de Cenoura</h3><p class="result-desc">Encontre aqui a receita de bolo de cenoura...</p></div>`;
+        const noResultsHTML = `<div class="result-item"><p class="result-desc">Nenhum resultado encontrado.</p></div>`;
+
+        // --- Helper: Popups ---
+        function proximaEtapa(idDoProximoPopup) {
+            document.querySelectorAll('.help-popup').forEach(popup => { popup.style.display = 'none'; });
+            if (idDoProximoPopup) { document.getElementById(idDoProximoPopup).style.display = 'block'; }
+        }
+
+        // --- Helper: Pesquisa ---
+        function performSearch() {
+            const query = targetInput.value.toLowerCase();
+            if (query.trim() === '') { alert('Por favor, digite algo para pesquisar!'); return; }
+            
+            if (query.includes('bolo') || query.includes('receita')) {
+                resultsListContainer.innerHTML = fakeResultsHTML;
+            } else {
+                resultsListContainer.innerHTML = noResultsHTML;
+            }
+            
+            searchHomeScreen.style.display = 'none';
+            resultsScreen.style.display = 'flex';
+            resultsSearchBar.value = targetInput.value;
+            targetInput.blur();
+            proximaEtapa('popup-3');
+        }
+
+        // --- LÓGICA DO TUTORIAL ---
+        targetInput.addEventListener('click', function() { proximaEtapa('popup-2'); });
+        targetSearchButton.addEventListener('click', function() { performSearch(); });
+        backButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            resultsScreen.style.display = 'none';
+            searchHomeScreen.style.display = 'flex';
+            targetInput.value = '';
+            proximaEtapa('popup-1');
+        });
+
+        // --- Início ---
+        document.addEventListener('DOMContentLoaded', function() {
+            proximaEtapa('popup-1');
+            document.querySelectorAll('.popup-close').forEach(button => {
+                button.addEventListener('click', function() { this.parentElement.style.display = 'none'; });
+            });
+        });
+    </script>
+</body>
+</html>

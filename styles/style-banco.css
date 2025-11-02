@@ -1,0 +1,193 @@
+/* --- ESTILOS DO TUTORIAL DE BANCO --- */
+
+.tutorial-screen.banco-bg {
+    background-color: #f6f8fc;
+}
+
+/* --- ESTILOS COMPARTILHADOS (Telas do Banco) --- */
+.banco-screen {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: #f6f8fc;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease-out;
+    /* Começa fora da tela (exceto o primeiro) */
+    transform: translateX(100%); 
+}
+
+/* Garante que a primeira tela (home) apareça */
+.banco-screen.active {
+    transform: translateX(0);
+}
+
+
+.banco-header {
+    display: flex;
+    align-items: center;
+    padding: 20px 20px 15px 20px;
+    background-color: #0073B1;
+    color: white;
+}
+
+.banco-header a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.5em;
+    margin-right: 20px;
+}
+
+.banco-header h4 {
+    margin: 0;
+    font-size: 1.4em;
+}
+
+/* --- TELA HOME (Saldo) --- */
+.banco-home-content {
+    padding: 20px;
+}
+
+.balance-card {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.balance-card h3 {
+    margin: 0;
+    font-size: 1em;
+    color: #555;
+    font-weight: 500;
+}
+
+.balance-card p {
+    margin: 5px 0 0;
+    font-size: 2.2em;
+    font-weight: bold;
+    color: #222;
+}
+
+.banco-grid-menu {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.banco-menu-button {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    color: #0073B1;
+    font-weight: bold;
+    font-size: 1.1em;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    cursor: pointer;
+}
+
+.banco-menu-button span {
+    font-size: 2.5em;
+    display: block;
+    margin-bottom: 10px;
+}
+
+/* --- TELAS DE PAGAMENTO (Genéricas) --- */
+.banco-screen.payment-flow {
+    background-color: white;
+}
+
+.banco-content {
+    padding: 20px;
+    flex-grow: 1;
+}
+
+.banco-content h2 {
+    font-size: 1.5em;
+    color: #222;
+    margin-top: 0;
+}
+
+.banco-content p {
+    font-size: 1.1em;
+    color: #555;
+    line-height: 1.5;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    background: #f9f9f9;
+}
+
+.banco-button-primary {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    background-color: #0073B1;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.2em;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+    margin-top: 30px;
+    text-decoration: none; /* Para caso usem <a> */
+}
+.banco-button-primary:hover {
+    background-color: #005a8a;
+}
+
+/* --- NOVOS ESTILOS PARA O TUTORIAL PIX --- */
+
+.form-group .input-valor {
+    font-size: 2.5em; /* Fonte bem grande para o valor */
+    font-weight: bold;
+    text-align: center;
+    color: #0073B1;
+    border: none;
+    border-bottom: 2px solid #ccc;
+    background: none;
+    padding: 10px 0;
+}
+
+.form-group .input-valor:focus {
+    outline: none;
+    border-bottom-color: #0073B1;
+}
+
+/* Para a tela de confirmação */
+.confirmation-details {
+    background-color: #f6f8fc;
+    border-radius: 8px;
+    padding: 15px;
+}
+
+.confirmation-details p {
+    margin: 10px 0;
+    font-size: 1.1em;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+.confirmation-details p strong {
+    color: #333;
+}

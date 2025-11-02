@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tutorial WhatsApp</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="style-whatsapp.css">
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/style-whatsapp.css">
 </head>
 <body>
 
@@ -14,20 +14,19 @@
             
             <div class="chat-list-screen" id="chat-list-screen">
                  <header class="tutorial-header">
-                    <!-- Botão voltar atualizado para menu-whatsapp.html -->
                     <a href="menu-whatsapp.html">←</a>
                     <h4>Conversas</h4>
                 </header>
                 <div class="whatsapp-chat-list">
                     <div class="chat-item" id="target-contato">
-                        <img src="perfil.png" alt="Foto">
+                        <img src="images/perfil.png" alt="Foto">
                         <div class="chat-info">
                             <h4>Maria (Filha)</h4>
                             <p>Clique aqui para começar!</p>
                         </div>
                     </div>
                     <div class="chat-item">
-                        <img src="perfil.png" alt="Foto">
+                        <img src="images/perfil.png" alt="Foto">
                         <div class="chat-info">
                             <h4>Grupo da Família</h4>
                             <p>Fulano: Foto</p>
@@ -39,7 +38,7 @@
             <div class="chat-screen" id="chat-screen">
                  <header class="tutorial-header" style="background-color: #075E54;">
                     <a href="#" id="back-button" style="font-size: 1.5em;">←</a>
-                    <img src="perfil.png" alt="Foto" style="width:40px; height:40px; border-radius: 50%; margin-right: 10px;">
+                    <img src="images/perfil.png" alt="Foto" style="width:40px; height:40px; border-radius: 50%; margin-right: 10px;">
                     <h4 style="margin:0;">Maria (Filha)</h4>
                 </header>
                 <div class="chat-history" id="chat-history"></div>
@@ -49,7 +48,6 @@
                 </div>
             </div>
 
-            <!-- ... (Popups 1 a 4 permanecem os mesmos) ... -->
             <div class="help-popup" id="popup-1" style="top: 150px; display: block;">
                 <span class="popup-close">X</span>
                 <p>Bem-vindo ao treino! 👋</p>
@@ -81,7 +79,6 @@
                 <span class="popup-close">X</span>
                 <p>Tutorial Concluído! ✅</p>
                 <p>Veja! A Maria respondeu. Você aprendeu a enviar e receber mensagens. Continue praticando!</p>
-                <!-- Botão voltar atualizado para menu-whatsapp.html -->
                 <button onclick="window.location.href='menu-whatsapp.html'">Voltar ao Menu</button>
             </div>
 
@@ -91,8 +88,71 @@
     <script>
         // --- Pegando todos os elementos ---
         const chatListScreen = document.getElementById('chat-list-screen');
-        // ... (resto do script) ...
-        backButton.addEventListener('click', function() {
+        const chatScreen = document.getElementById('chat-screen');
+        const chatHistory = document.getElementById('chat-history');
+        const targetContato = document.getElementById('target-contato');
+        const targetInput = document.getElementById('target-input');
+        const targetSend = document.getElementById('target-send');
+        const backButton = document.getElementById('back-button');
+
+        // --- Função Helper: Controla os Popups ---
+        function proximaEtapa(idDoProximoPopup) {
+            document.querySelectorAll('.help-popup').forEach(popup => {
+                popup.style.display = 'none';
+            });
+            if (idDoProximoPopup) {
+                document.getElementById(idDoProximoPopup).style.display = 'block';
+            }
+        }
+
+        // --- Função Helper: Cria Bolhas de Chat ---
+        function criarBolhaDeChat(texto, tipo) {
+            const bolha = document.createElement('div');
+            bolha.classList.add('chat-bubble', tipo === 'sent' ? 'bubble-sent' : 'bubble-received');
+            bolha.textContent = texto; // Usando textContent por segurança
+            chatHistory.appendChild(bolha);
+            chatHistory.scrollTop = chatHistory.scrollHeight;
+        }
+
+        // --- LÓGICA DO TUTORIAL ---
+
+        // ETAPA 1: Clicar no Contato
+        targetContato.addEventListener('click', function() {
+            chatListScreen.style.transform = 'translateX(-100%)';
+            chatScreen.style.transform = 'translateX(0)';
+            proximaEtapa('popup-2');
+        });
+
+        // ETAPA 2: Clicar na Caixa de Texto
+        targetInput.addEventListener('click', function() {
+            targetSend.classList.remove('hidden');
+            proximaEtapa('popup-3');
+        });
+
+        // ETAPA 3: Clicar em Enviar
+        targetSend.addEventListener('click', function() {
+            const texto = targetInput.value;
+            if (texto.trim() !== '') {
+                criarBolhaDeChat(texto, 'sent');
+                targetInput.value = '';
+                targetSend.classList.add('hidden');
+                targetInput.blur(); // Esconde o teclado
+                proximaEtapa('popup-4');
+                
+                // Simula a resposta
+                setTimeout(function() {
+                    const respostaMsg = `Oi! Tudo bem?`;
+                    criarBolhaDeChat(respostaMsg, 'received');
+                    setTimeout(function() {
+                        proximaEtapa('popup-5');
+                    }, 1000); 
+                }, 2000); 
+            }
+        });
+
+        // --- Botões Extras ---
+        backButton.addEventListener('click', function(e) {
+            e.preventDefault(); // Impede o link '#' de pular a tela
             chatListScreen.style.transform = 'translateX(0)';
             chatScreen.style.transform = 'translateX(100%)';
             chatHistory.innerHTML = '';
@@ -102,7 +162,14 @@
 
         // Inicia o tutorial (mostra o primeiro popup)
         document.addEventListener('DOMContentLoaded', function() {
-            // ... (resto do script) ...
+            proximaEtapa('popup-1');
+
+            // Adiciona a funcionalidade de fechar em todos os botões 'X'
+            document.querySelectorAll('.popup-close').forEach(button => {
+                button.addEventListener('click', function() {
+                    this.parentElement.style.display = 'none';
+                });
+            });
         });
     </script>
 

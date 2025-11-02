@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial - Pesquisa por Áudio</title>
+    
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/style-search.css">
+</head>
+<body>
+
+    <div class="app-container">
+        <div class="tutorial-screen search-bg">
+            
+            <div class="search-home-screen" id="search-home-screen">
+                <div class="search-logo">
+                    <span>C</span><span>o</span><span>n</span><span>e</span><span>c</span><span>t</span><span>a</span>
+                </div>
+                <div class="search-bar-container">
+                    <input type="text" class="search-input" id="target-input" placeholder="Digite aqui...">
+                    <button class="mic-button" id="target-mic-button">🎤</button>
+                    <button class="search-button" id="target-search-button">🔍</button>
+                </div>
+            </div>
+
+            <div class="results-screen" id="results-screen">
+                <header class="results-header">
+                    <a href="#" id="back-button">←</a>
+                    <input type="text" id="results-search-bar" readonly>
+                </header>
+                <div class="results-list" id="results-list-container">
+                    </div>
+            </div>
+
+            <div class="voice-search-overlay" id="voice-overlay">
+                <span>🎤</span>
+                <p>Ouvindo...</p>
+            </div>
+
+            <div class="help-popup" id="popup-1" style="display: block;">
+                <span class="popup-close">X</span>
+                <p>Bem-vindo ao treino de Pesquisa por Áudio! 🎤</p>
+                <p>Para começar, **clique no ícone de microfone (🎤)** ao lado da barra.</p>
+            </div>
+
+            <div class="help-popup" id="popup-voice" style="z-index: 120;">
+                <span class="popup-close">X</span>
+                <p>Simulando pesquisa por voz!</p>
+                <p>Vamos pesquisar "receita de bolo" para você.</p>
+            </div>
+
+            <div class="help-popup" id="popup-results">
+                <span class="popup-close">X</span>
+                <p>Aqui estão seus resultados! 📄</p>
+                <p>Encontramos resultados para "receita de bolo". Leia os títulos para escolher o melhor site.</p>
+                <button onclick="proximaEtapa('popup-final')">Entendido!</button>
+            </div>
+
+            <div class="help-popup" id="popup-final">
+                <span class="popup-close">X</span>
+                <p>Tutorial Concluído! ✅</p>
+                <p>Você aprendeu a pesquisar usando a voz! **Clique no '←'** para voltar ou no botão abaixo.</p>
+                <button onclick="window.location.href='menu-search.html'">Voltar ao Menu</button>
+            </div>
+            
+        </div>
+    </div>
+
+    <script>
+        // --- Pegando elementos ---
+        const searchHomeScreen = document.getElementById('search-home-screen');
+        const resultsScreen = document.getElementById('results-screen');
+        const targetInput = document.getElementById('target-input');
+        const backButton = document.getElementById('back-button');
+        const resultsSearchBar = document.getElementById('results-search-bar');
+        const resultsListContainer = document.getElementById('results-list-container');
+        const targetMicButton = document.getElementById('target-mic-button');
+        const voiceOverlay = document.getElementById('voice-overlay');
+
+        // --- Resultados Falsos ---
+        const fakeResultsHTML = `<div class="result-item"><p class="result-url">receitas.com.br</p><h3 class="result-title">Receita de Bolo de Chocolate</h3><p class="result-desc">A melhor receita de bolo de chocolate...</p></div> <div class="result-item"><p class="result-url">tudogostoso.com.br</p><h3 class="result-title">Bolo de Cenoura</h3><p class="result-desc">Encontre aqui a receita de bolo de cenoura...</p></div>`;
+
+        // --- Helper: Popups ---
+        function proximaEtapa(idDoProximoPopup) {
+            document.querySelectorAll('.help-popup').forEach(popup => { popup.style.display = 'none'; });
+            if (idDoProximoPopup) { document.getElementById(idDoProximoPopup).style.display = 'block'; }
+        }
+
+        // --- Helper: Pesquisa ---
+        function performSearch(query) {
+            // Unificamos a função de pesquisa
+            resultsListContainer.innerHTML = fakeResultsHTML; // Para este tutorial, sempre mostramos resultados
+            searchHomeScreen.style.display = 'none';
+            resultsScreen.style.display = 'flex';
+            resultsSearchBar.value = query;
+            targetInput.value = query; // Atualiza o input da home também
+            proximaEtapa('popup-results');
+        }
+
+        // --- LÓGICA DO TUTORIAL ---
+        targetMicButton.addEventListener('click', function() {
+            proximaEtapa('popup-voice');
+            voiceOverlay.style.display = 'flex'; // Mostra a tela "Ouvindo..."
+
+            setTimeout(function() {
+                const searchQuery = 'receita de bolo';
+                voiceOverlay.style.display = 'none'; // Esconde "Ouvindo..."
+                performSearch(searchQuery); // Executa a pesquisa
+            }, 3000); // Espera 3 segundos
+        });
+
+        backButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            resultsScreen.style.display = 'none';
+            searchHomeScreen.style.display = 'flex';
+            targetInput.value = '';
+            proximaEtapa('popup-1');
+        });
+
+        // --- Início ---
+        document.addEventListener('DOMContentLoaded', function() {
+            proximaEtapa('popup-1');
+            document.querySelectorAll('.popup-close').forEach(button => {
+                button.addEventListener('click', function() { this.parentElement.style.display = 'none'; });
+            });
+        });
+    </script>
+</body>
+</html>

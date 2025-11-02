@@ -3,15 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conecta+ Prototype</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Guia Tech</title>
+    <link rel="stylesheet" href="styles/style.css"> 
 </head>
 <body>
 
-    <div class="app-container">
+    <div id="loader-container">
+        <div class="loader-spinner"></div>
+        <img src="images/logo.png" alt="Logo">
+    </div>
+
+    <div class="app-container" id="main-content" style="display: none;">
         
         <header class="app-header">
-            <h1>Conecta+</h1>
+            <img src="images/logo.png" alt="Logo">
             <p>Seu assistente de inclusão digital.</p>
         </header>
 
@@ -19,27 +24,48 @@
             <h2>Escolha o que quer aprender:</h2>
             
             <a href="menu-whatsapp.html" class="menu-button whatsapp">
-                <img src="WhatsApp.svg.webp" alt="Logo do WhatsApp" class="logo">
+                <img src="images/whatsapp.png" alt="Logo do WhatsApp" class="logo">
                 Aprenda a usar o WhatsApp
             </a>
 
-            <a href="tutorial-instagram.html" class="menu-button instagram">
-                <span>📸</span>
-                Aprender a usar o Instagram
+            <a href="menu-banco.html" class="menu-button banco">
+                <span>🏦</span>
+                Aprender a usar o App do Banco
             </a>
 
-            <a href="tutorial-email.html" class="menu-button email">
+            <a href="menu-email.html" class="menu-button email">
                 <span>✉️</span>
                 Aprender a enviar E-mail
             </a>
 
-            <a href="tutorial-search.html" class="menu-button search">
+            <a href="menu-search.html" class="menu-button search">
                 <span>🔍</span>
                 Aprender a fazer pesquisas
             </a>
         </main>
 
     </div>
+
+    <script>
+        // Adiciona um "ouvinte" para quando o DOM estiver pronto
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            // Pega os elementos
+            const loader = document.getElementById('loader-container');
+            const mainContent = document.getElementById('main-content');
+        
+            // Simula um tempo de carregamento (ex: 2.5 segundos)
+            setTimeout(function() {
+                
+                // Esconde a tela de carregamento
+                loader.style.display = 'none';
+        
+                // Mostra o conteúdo principal do app
+                mainContent.style.display = 'block'; 
+
+            }, 2500); // 2500ms = 2.5 segundos. Ajuste este valor se quiser.
+        });
+    </script>
 
 </body>
 </html>

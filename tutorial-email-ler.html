@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial - Ler E-mail</title>
+    
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/style-email.css">
+</head>
+<body>
+
+    <div class="app-container">
+        <div class="tutorial-screen email-bg">
+            
+            <div class="inbox-screen" id="inbox-screen">
+                <header class="email-header">
+                    <a href="menu-email.html">←</a>
+                    <h4>Caixa de Entrada</h4>
+                </header>
+                
+                <div class="email-list">
+                    <div class="email-item target-email" id="target-email">
+                        <div class="email-avatar" style="background-color: #d93025;">B</div>
+                        <div class="email-details">
+                            <h4>Banco Digital</h4>
+                            <p>Sua fatura de novembro chegou.</p>
+                        </div>
+                    </div>
+                    <div class="email-item">
+                        <div class="email-avatar" style="background-color: #1a73e8;">L</div>
+                        <div class="email-details">
+                            <h4>Loja Online</h4>
+                            <p>Confirmação do pedido 12345</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="email-view-screen" id="email-view-screen">
+                <header class="email-view-header">
+                    <a href="#" id="back-button">←</a>
+                    <h2>Sua fatura de novembro</h2>
+                </header>
+                <div class="email-view-sender">
+                    <div class="email-avatar" style="background-color: #d93025;">B</div>
+                    <div class="email-details" style="margin-left: 15px;">
+                        <h4>Banco Digital</h4>
+                        <p>para: voce@email.com</p>
+                    </div>
+                </div>
+                <div class="email-view-body">
+                    <p>Olá,</p>
+                    <p>A fatura do seu cartão com vencimento em 10/11 já está fechada.</p>
+                    <p>Valor: R$ 123,45</p>
+                    <p>Obrigado,<br>Equipe Banco Digital</p>
+                </div>
+            </div>
+
+            <div class="help-popup" id="popup-1" style="display: block;">
+                <span class="popup-close">X</span>
+                <p>Vamos aprender a ler um e-mail. 📥</p>
+                <p>Sua caixa de entrada mostra os e-mails que você recebeu. **Clique no e-mail do 'Banco Digital'** para abri-lo.</p>
+            </div>
+
+            <div class="help-popup" id="popup-2">
+                <span class="popup-close">X</span>
+                <p>Ótimo! Você abriu o e-mail.</p>
+                <p>Agora você pode ler o conteúdo da mensagem. Quando terminar, **clique na seta '←'** para voltar à caixa de entrada.</p>
+            </div>
+
+            <div class="help-popup" id="popup-3">
+                <span class="popup-close">X</span>
+                <p>Tutorial Concluído! ✅</p>
+                <p>Você aprendeu a abrir e ler um e-mail. Simples assim!</p>
+                <button onclick="window.location.href='menu-email.html'">Voltar ao Menu</button>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // --- Pegando todos os elementos ---
+        const inboxScreen = document.getElementById('inbox-screen');
+        const emailViewScreen = document.getElementById('email-view-screen');
+        const targetEmail = document.getElementById('target-email');
+        const backButton = document.getElementById('back-button');
+
+        // --- Função Helper: Popups ---
+        function proximaEtapa(idDoProximoPopup) {
+            document.querySelectorAll('.help-popup').forEach(popup => {
+                popup.style.display = 'none';
+            });
+            if (idDoProximoPopup) {
+                document.getElementById(idDoProximoPopup).style.display = 'block';
+            }
+        }
+
+        // --- Função Helper: Telas ---
+        function irParaTela(idDaTela) {
+            if (idDaTela === 'inbox-screen') {
+                inboxScreen.style.transform = 'translateX(0)';
+                emailViewScreen.style.transform = 'translateX(100%)';
+            } else if (idDaTela === 'email-view-screen') {
+                inboxScreen.style.transform = 'translateX(-100%)';
+                emailViewScreen.style.transform = 'translateX(0)';
+            }
+        }
+
+        // --- LÓGICA DO TUTORIAL ---
+
+        // ETAPA 1: Clicar no E-mail
+        targetEmail.addEventListener('click', function() {
+            irParaTela('email-view-screen');
+            proximaEtapa('popup-2');
+        });
+
+        // ETAPA 2: Clicar em Voltar
+        backButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            irParaTela('inbox-screen');
+            proximaEtapa('popup-3');
+        });
+
+        // Inicia o tutorial
+        document.addEventListener('DOMContentLoaded', function() {
+            proximaEtapa('popup-1');
+            document.querySelectorAll('.popup-close').forEach(button => {
+                button.addEventListener('click', function() {
+                    this.parentElement.style.display = 'none';
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
