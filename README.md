@@ -39,4 +39,4 @@ Para transformar o **Eu + Digital** em uma plataforma expansível, o próximo pa
 
 Planejamos desenvolver um sistema onde um agente de IA possa aprender a usar um aplicativo e, a partir disso, gerar automaticamente o simulador de treinamento.
 
-Isso nos permitiria escalar de 4 para centenas de aplicativos, adicionando novos tutoriais (como "Como usar o Spotify" ou "Como usar o app do SUS") em questão de horas, tornando o **Eu + Digital** uma plataforma de inclusão universal.
+Isso nos permitiria escalar de 4 para centenas de aplicativos, adicionando novos tutoriais em questão de horas, tornando o **Eu + Digital** uma plataforma de inclusão universal.
