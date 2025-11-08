@@ -1,177 +1,248 @@
 /* --- CONFIGURAÇÕES GLOBAIS --- */
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    box-sizing: border-box;
+    background-color: #e0e0e0; /* Fundo cinza claro que simula a "mesa" onde o celular está */
     margin: 0;
     padding: 0;
+    display: flex; /* Para centralizar o app-container no PC */
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente o app-container */
+    min-height: 100vh; /* Ocupa a altura total da tela */
+    box-sizing: border-box;
 }
 
 /* --- A MOLDURA DO APP (CELULAR) --- */
 .app-container {
     width: 100%;
-    max-width: 400px; /* Largura de um celular */
-    height: 800px;
-    background-color: #f5f5f5;
-    overflow: hidden; 
+    max-width: 400px; /* Largura máxima para simular um celular no PC */
+    height: 100vh; /* Força o app-container a ocupar 100% da altura visível */
+    max-height: 800px; /* Limita a altura em telas grandes para manter proporção de celular */
+    background-color: #f7f7f7; /* Fundo do container para combinar com o corpo */
+    overflow: hidden; /* Importante para o layout */
     position: relative;
+    box-shadow: 0 0 40px rgba(0,0,0,0.1); /* Sombra mais pronunciada e suave */
+    border-radius: 28px; /* Cantos arredondados em todo o "celular" */
 }
 
-/* --- TELA PRINCIPAL (index.html) --- */
+/* --- CABEÇALHO DA APLICAÇÃO --- */
 .app-header {
-    background-color: #243a69; /* Cor principal */
+    background-color: #243a69; /* Sua cor principal (azul escuro para o index) */
     color: white;
-    padding: 30px 20px 20px;
-    font-weight: 500;
-    /* MUDANÇA: Usando Flexbox para centralizar */
+    padding: 20px 25px; /* Padding padrão para o header do index */
     display: flex;
-    flex-direction: column; /* Organiza os itens em coluna */
-    align-items: center;   /* Centraliza horizontalmente */
+    flex-direction: row;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1); 
+    position: relative;
+    z-index: 10;
+    overflow: hidden;
 }
 
-/* NOVO: Estilo para a logo dentro do header */
-.app-header img {
-    width: 250px;  /* Ajuste este valor para o tamanho da sua logo */
-    height: auto;  /* Mantém a proporção */
-    margin-bottom: 40px; /* Espaço entre a logo e o parágrafo */
+/* --- IMAGEM DE FUNDO DO HEADER --- */
+.app-header::before {
+    content: ""; /* Necessário para o pseudo-elemento */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    /* 1. COLOQUE O CAMINHO DA SUA IMAGEM AQUI */
+    background-image: url('../images/img-header.png'); 
+    
+    background-size: cover;   /* Faz a imagem cobrir o header */
+    background-position: center; /* Centraliza a imagem */
+    
+    /* 2. AJUSTE A OPACIDADE (0.3 = 30% visível) */
+    opacity: 0.3; 
+    
+    z-index: -1; /* Coloca a imagem ATRÁS do seu logo e texto */
 }
 
-/* NOVO: Regra para o parágrafo no header */
+/* NOVO: Estilo para o H1 dentro do app-header */
+.app-header h1 {
+    margin: 0; /* Remove margem padrão do h1 */
+    font-size: 1.6em; /* Tamanho do título principal */
+    flex-grow: 1; /* Faz o título ocupar o espaço disponível */
+    text-align: center; /* Centraliza o texto do h1 */
+    padding: 5px;
+    padding-top: 0;
+}
+
+/* NOVO: Estilo para o P dentro do app-header (o subtítulo "O que você quer aprender?") */
 .app-header p {
-    margin: 0; /* Remove margens padrão do parágrafo */
-    font-size: 1.3em;
-    opacity: 0.9;
+    margin: 0;
+    font-size: 1em;
+    opacity: 0.8;
+    position: absolute; /* Para posicioná-lo abaixo do h1 */
+    bottom: 5px; /* Ajuste conforme a altura do seu header */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
     text-align: center;
+    padding: 5px;
 }
 
+
+.app-header img {
+    width: 150px; 
+    height: auto;  
+    margin-bottom: 0;
+}
+
+
+/* --- MENU PRINCIPAL (index.html) --- */
 .app-menu {
-    padding: 20px 15px;
+    padding: 25px 20px; 
+    background-color: #f7f7f7; 
+    position: relative;
+    z-index: 5;
 }
 
 .app-menu h2 {
-    /* Centraliza o título */
-    text-align: center; 
-    color: #333; /* Um pouco mais suave que preto puro */
-    font-size: 1.5em;
-    margin-bottom: 25px; /* Mais espaço abaixo do título */
-}
-
-.menu-button {
-    display: flex;         /* Para alinhar o logo e o texto */
-    align-items: center;   /* Centraliza verticalmente */
-    background-color: rgb(255, 255, 255);
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    padding: 15px;         /* Espaço interno */
-    margin-bottom: 15px;   /* Espaço entre botões (do Passo 2) */
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.08); /* Sombra suave */
-    transition: transform 0.2s; /* Efeito ao clicar */
-    text-decoration: none;
     font-size: 1.8em;
+    color: #222;
+    margin: 0 0 5px 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd; 
+}
+
+.app-menu h3 {
+    font-size: 1.2em;
+    color: #555;
     font-weight: 500;
-    /* Cor do texto dentro do botão */
-    color: #333333;
-}
-.menu-button:hover {
-    transform: scale(1.03); /* Efeito de "levantar" */
+    margin: 25px 0 15px 0;
 }
 
-/* Regra para a imagem (logo) dentro do botão */
-.menu-button img,
-.menu-button span { /* Para funcionar com <img> e <span> */
-    width: 50px;
-    height: 50px;
-    margin-right: 10px;
+.app-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
 }
 
-
-/* --- ESTILO BASE DAS TELAS DE TUTORIAL --- */
-.tutorial-screen {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    background-color: #fafafa; /* Um fundo padrão neutro */
+.app-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: #333;
+    background-color: #ffffff;
+    padding: 20px 10px;
+    border-radius: 24px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.app-icon:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.12);
 }
 
-/* --- O SIMULADOR DA IA (Pop-ups de ajuda) --- */
+.app-icon img {
+    width: 70px; 
+    height: 70px;
+    border-radius: 18px; 
+    margin-bottom: 15px; 
+    object-fit: cover;
+}
+
+.app-icon p {
+    margin: 0;
+    font-size: 1em;
+    font-weight: 500;
+    text-align: center;
+}
+
+/* --- ESTILO PARA BOTÕES DESABILITADOS --- */
+.menu-button.disabled {
+    background-color: #ececec; 
+    color: #999; 
+    box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+    pointer-events: none;
+    opacity: 0.8;
+}
+
+/* --- ESTILOS PADRÃO DE POPUP DE AJUDA --- */
 .help-popup {
     position: absolute;
-    background-color: rgba(0,0,0,0.7);
+    background-color: #243a69; 
     color: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    z-index: 100;
+    padding: 25px;
+    border-radius: 15px; 
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3); 
+    z-index: 1000;
     width: 90%;
+    max-width: 320px; 
     left: 50%;
-    transform: translateX(-50%);
-    display: none; /* Começa escondido */
+    top: 50%; 
+    transform: translate(-50%, -50%); 
+    display: none;
+    text-align: center; 
+    line-height: 1.5;
 }
 
 .help-popup p {
     margin: 0 0 10px 0;
-    font-size: 1.1em;
-    line-height: 1.5;
+    font-size: 1.05em; 
 }
 .help-popup p strong {
-    color: #58a6ff; /* Azul para destacar */
+    color: #a7d9ff; 
 }
 
-.help-popup button {
-    width: 100%;
-    padding: 10px;
-    margin-top: 15px;
-    background-color: #007bff;
+/* --- ESTILOS DOS BOTÕES DO POPUP --- */
+.popup-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 25px;
+}
+
+.help-popup button.popup-button-primary {
+    flex-grow: 1;
+    padding: 12px;
+    background-color: #007bff; 
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     font-size: 1em;
     font-weight: bold;
     cursor: pointer;
+    transition: background-color 0.2s;
+}
+.help-popup button.popup-button-primary:hover {
+    background-color: #0060cc; 
 }
 
-/* --- ESTILO DO BOTÃO DE FECHAR O POPUP (NOVO) --- */
+.help-popup button.popup-button-secondary {
+    flex-grow: 1;
+    padding: 12px;
+    background-color: transparent;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+.help-popup button.popup-button-secondary:hover {
+    background-color: rgba(255,255,255, 0.15);
+    border-color: rgba(255,255,255, 0.15);
+}
+
 .popup-close {
     position: absolute;
     top: 10px;
     right: 15px;
     font-size: 1.5em;
     font-weight: bold;
-    color: #aaa;
+    color: #d0e9ff; 
     cursor: pointer;
-    line-height: 1; /* Para alinhar o 'X' perfeitamente */
+    line-height: 1;
 }
 .popup-close:hover {
     color: white;
 }
 
-/* --- CLASSES DE CONTROLE --- */
-.hidden {
-    display: none !important;
-}
-
-.logo{
-    width: 30px;
-}
-
-.header-back-button {
-    position: absolute;
-    top: 20px;
-    left: 25px;
-    color: white;
-    text-decoration: none;
-    font-size: 0.8em;
-    font-weight: 600;
-}
-.header-back-button:hover {
-    text-decoration: underline;
-}
-
 /* --- ESTILOS DA TELA DE CARREGAMENTO (SPLASH) --- */
-
 #loader-container {
     position: fixed; 
     top: 0;
@@ -184,15 +255,14 @@ body {
     justify-content: center;
     align-items: center;
     z-index: 9999; 
-    /* Removemos os estilos de fonte, pois não há mais texto */
+    color: white;
 }
 
-/* NOVO ESTILO PARA A LOGO */
 #loader-container img {
-    width: 200px; /* Ajuste o tamanho da sua logo */
+    width: 180px; 
     max-width: 60%;
     height: auto;
-    margin-top: 20px; /* Espaço entre o spinner e a logo */
+    margin-bottom: 20px; 
 }
 
 .loader-spinner {
@@ -202,7 +272,6 @@ body {
     width: 40px;
     height: 40px;
     animation: spin 1s linear infinite; 
-    margin-bottom: 20px;
 }
 
 @keyframes spin {
@@ -210,73 +279,102 @@ body {
     100% { transform: rotate(360deg); }
 }
 
-#instrucao-inicial {
-    height: 100%;
-    width: 100%;
-    background-color: #f3f3f3;
-    display: flex;
-    z-index: 100;
-}
-
-.app-container {
-    width: 100%;
-/* ... (código existente) ... */
-    overflow: hidden; 
-    position: relative;
-}
-
-/* NOVO: OVERLAY DE BOAS-VINDAS */
-#welcome-overlay {
+/* --- BOTÃO DE VOLTAR (Header) --- */
+.header-back-button {
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 50%; /* Centraliza verticalmente no header */
+    left: 15px; /* Posição à esquerda */
+    transform: translateY(-50%); /* Ajuste final para centralização vertical */
+    width: 40px; 
+    height: 40px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white; 
+    text-decoration: none;
+    font-size: 1.5em; 
+    cursor: pointer;
+    transition: transform 0.2s, opacity 0.2s;
+    border-radius: 50%;
+}
+
+.header-back-button svg {
+    fill: currentColor; 
+    width: 24px; 
+    height: 24px;
+}
+
+.header-back-button:hover {
+    opacity: 0.8;
+    transform: translateY(-50%) scale(1.05); /* Mantém centralização e adiciona zoom */
+}
+
+/* ===============================================
+   --- ESTILOS PARA PÁGINAS DE SUBMENU ---
+   ===============================================
+*/
+
+/* O container principal nos submenus */
+.submenu-list {
+    padding: 20px 15px;
+}
+
+/* O botão de lista nos submenus */
+.submenu-button {
+    display: flex;         
+    align-items: center;   
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    padding: 15px;         
+    margin-bottom: 15px;   
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08); 
+    transition: transform 0.2s; 
+    text-decoration: none;
+    font-size: 1.2em; 
+    font-weight: 500;
+    color: #333333;
+}
+.submenu-button:hover {
+    transform: scale(1.03); 
+}
+
+/* Ícones dentro dos botões de submenu */
+.submenu-button img,
+.submenu-button span {
+    width: 30px; 
+    height: 30px;
+    margin-right: 15px;
+    object-fit: contain;
+}
+
+/* Cores específicas dos botões de submenu */
+.submenu-button.whatsapp {
+    border-left: 5px solid #25D366;
+}
+.submenu-button.banco {
+    border-left: 5px solid #0073B1;
+}
+.submenu-button.email {
+    border-left: 5px solid #EA4335;
+}
+.submenu-button.search {
+    border-left: 5px solid #4285F4;
+}
+
+.logo { 
+    width: 30px;
+    height: 30px;
+    object-fit: contain; 
+}
+
+.tutorial-screen { 
     width: 100%;
     height: 100%;
-    background-color: #ffffff; /* Fundo branco, como pedido */
-    z-index: 200; /* Acima do main-content */
-    display: none; /* Começa escondido */
+    position: relative;
+    background-color: #f7f7f7;
 }
 
-/* --- ESTILOS DOS BOTÕES DO POPUP --- */
-
-/* Um container para alinhar os botões */
-.popup-actions {
-    display: flex;
-    gap: 10px; /* Espaço entre os botões */
-    margin-top: 20px;
-}
-
-/* Vamos re-estilizar o botão padrão do popup 
-  para ele se tornar o botão "Entendi!" (Primário)
-*/
-.help-popup button.popup-button-primary {
-    flex-grow: 1; /* Faz os botões dividirem o espaço */
-    padding: 12px;
-    margin-top: 0; /* Remove a margem antiga */
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 1em;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-/* Novo estilo para o botão "Ouvir" (Secundário)
-  Ele será transparente com uma borda
-*/
-.help-popup button.popup-button-secondary {
-    flex-grow: 1;
-    padding: 12px;
-    margin-top: 0;
-    background-color: transparent;
-    color: #ffffff;
-    border: 2px solid #ffffff;
-    border-radius: 8px;
-    font-size: 1em;
-    font-weight: bold;
-    cursor: pointer;
-}
-.help-popup button.popup-button-secondary:hover {
-    background-color: rgba(255,255,255, 0.1); /* Efeito sutil */
+.hidden {
+    display: none !important;
 }

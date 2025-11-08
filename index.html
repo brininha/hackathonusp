@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="styles/style.css"> 
     <style>
         body {
-            /* Corrigido (sem aspas) */
+            /* Fundo azul escuro para a tela de carregamento */
             background-color: #243a69;
         }
     </style>
@@ -20,7 +20,7 @@
     </div>
 
     <div id="welcome-overlay">
-        <div class="help-popup" id="popup-boas-vindas" style="display: none; top: 25%;">
+        <div class="help-popup" id="popup-boas-vindas" style="display: none;">
             <span class="popup-close">X</span>
             <p>Bem-vindo ao <strong>Eu + Digital</strong>! 👋</p>
             <p>Nós vamos te ajudar a aprender a usar os aplicativos mais importantes do dia a dia, passo a passo.</p>
@@ -40,34 +40,38 @@
         </header>
 
         <main class="app-menu">
-            <h2>Escolha o que quer aprender:</h2>
+            <h2>Aprenda algo novo!</h2>
+            <h3>Seus apps</h3>
             
-            <a href="menu-whatsapp.html" class="menu-button whatsapp">
-                <img src="images/whatsapp.png" alt="Logo do WhatsApp" class="logo">
-                WhatsApp
-            </a>
+            <div class="app-grid">
+                
+                <a href="menu-whatsapp.html" class="app-icon">
+                    <img src="images/whatsapp.png" alt="Logo do WhatsApp">
+                    <p>WhatsApp</p>
+                </a>
 
-            <a href="menu-banco.html" class="menu-button banco">
-                <img src="images/banco.png" alt="Ilustração de banco" class="logo">
-                App de banco
-            </a>
+                <a href="menu-banco.html" class="app-icon">
+                    <img src="images/banco.png" alt="Ilustração de banco">
+                    <p>App de banco</p>
+                </a>
 
-            <a href="menu-email.html" class="menu-button email">
-                <img src="images/gmail.png" alt="Logo do Gmail" class="logo">
-                Gmail
-            </a>
+                <a href="menu-email.html" class="app-icon">
+                    <img src="images/gmail.png" alt="Logo do Gmail">
+                    <p>Gmail</p>
+                </a>
 
-            <a href="menu-search.html" class="menu-button search">
-                <img src="images/google.png" alt="Logo do Google" class="logo">
-                Google
-            </a>
+                <a href="menu-search.html" class="app-icon">
+                    <img src="images/google.png" alt="Logo do Google">
+                    <p>Google</p>
+                </a>
+            </div>
         </main>
 
     </div>
 
     <script>
         
-        /* --- FUNÇÃO DE FALA (Não mudou) --- */
+        /* --- FUNÇÃO DE FALA --- */
         function falarTexto(texto) {
             window.speechSynthesis.cancel(); 
             const utterance = new SpeechSynthesisUtterance(texto);
@@ -83,11 +87,8 @@
             const welcomeOverlay = document.getElementById('welcome-overlay'); 
             const popupBoasVindas = document.getElementById('popup-boas-vindas');
             
-            // Nossos dois botões do popup
             const btnEntendi = document.getElementById('btn-entendi');
-            const btnOuvir = document.getElementById('btn-ouvir-agora'); // NOVO
-            
-            // Botão 'X' 
+            const btnOuvir = document.getElementById('btn-ouvir-agora'); 
             const btnClose = popupBoasVindas.querySelector('.popup-close');
             
             const storageKey = 'jaViuBoasVindas';
@@ -100,35 +101,27 @@
                 if (localStorage.getItem(storageKey) === null) {
                     welcomeOverlay.style.display = 'block'; 
                     popupBoasVindas.style.display = 'block'; 
-                    // NÃO falamos mais nada automaticamente
                 }
             }, 1000); 
 
-            // --- NOVAS AÇÕES DOS BOTÕES ---
+            // --- AÇÕES DOS BOTÕES ---
 
-            // AÇÃO 1: O usuário clica em "Ouvir"
             btnOuvir.addEventListener('click', function() {
                 let textoParaFalar = "";
-                // Pega o texto dos 3 parágrafos do popup
                 popupBoasVindas.querySelectorAll('p').forEach(paragrafo => {
                     textoParaFalar += paragrafo.innerText + " "; 
                 });
-                // Chama a função de falar
                 falarTexto(textoParaFalar);
             });
 
-            // Função para fechar o popup
             function fecharPopup() {
                 welcomeOverlay.style.display = 'none'; 
                 popupBoasVindas.style.display = 'none'; 
                 localStorage.setItem(storageKey, 'true');
-                window.speechSynthesis.cancel(); // Para a fala
+                window.speechSynthesis.cancel(); 
             }
 
-            // AÇÃO 2: O usuário clica em "Entendi!"
             btnEntendi.addEventListener('click', fecharPopup);
-
-            // AÇÃO 3: O usuário clica no "X"
             if (btnClose) {
                 btnClose.addEventListener('click', fecharPopup);
             }
