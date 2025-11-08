@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eu + Digital</title>
-    <link rel="stylesheet" href="styles/style.css"> 
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="shortcut icon" href="icons/favicon.ico" type="image/x-icon">
     <style>
         body {
-            /* Fundo azul escuro para a tela de carregamento */
             background-color: #243a69;
         }
     </style>
@@ -71,7 +71,7 @@
 
     <script>
         
-        /* --- FUNÇÃO DE FALA --- */
+        /* Função de fala */
         function falarTexto(texto) {
             window.speechSynthesis.cancel(); 
             const utterance = new SpeechSynthesisUtterance(texto);
@@ -79,7 +79,7 @@
             window.speechSynthesis.speak(utterance); 
         }
 
-        /* --- LÓGICA PRINCIPAL DA PÁGINA --- */
+        /* Lógica principal da página */
         document.addEventListener('DOMContentLoaded', function() {
             
             const loader = document.getElementById('loader-container');
@@ -104,7 +104,7 @@
                 }
             }, 1000); 
 
-            // --- AÇÕES DOS BOTÕES ---
+            /* Ações dos botões */
 
             btnOuvir.addEventListener('click', function() {
                 let textoParaFalar = "";
