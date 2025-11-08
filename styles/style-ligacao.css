@@ -85,3 +85,7 @@
     /* Rotação do ícone de telefone */
     transform: rotate(135deg);
 }
+
+.app-header::before {
+    opacity: 0;
+}

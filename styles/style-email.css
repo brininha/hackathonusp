@@ -214,3 +214,7 @@
     flex-grow: 1;
     overflow-y: auto;
 }
+
+.app-header::before {
+    opacity: 0;
+}

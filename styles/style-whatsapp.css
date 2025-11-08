@@ -201,3 +201,7 @@
     justify-content: center;
     transform: rotate(135deg); /* Rotação do ícone de telefone */
 }
+
+.app-header::before {
+    opacity: 0;
+}

@@ -189,6 +189,11 @@
     border-bottom: 1px solid #eee;
     padding-bottom: 10px;
 }
+
 .confirmation-details p strong {
     color: #333;
+}
+
+.app-header::before {
+    opacity: 0;
 }
