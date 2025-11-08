@@ -8,7 +8,7 @@
   <img src="https://img.shields.io/badge/Hackathon-USP_2025-blueviolet.svg" alt="Hackathon USP 2025">
 </div>
 
-## 🚀 Sobre o Projeto
+## 🚀 Sobre o projeto
 
 O **Eu + Digital** é um protótipo funcional estruturado para o **Hackathon USP 2025**.
 
@@ -18,7 +18,7 @@ Nossa solução é um ambiente de aprendizado seguro, que guia o usuário, passo
 
 <br>
 
-## 🛠️ Tecnologias Utilizadas
+## 🛠️ Tecnologias utilizadas
 
 Este protótipo foi construído 100% com tecnologias web fundamentais.
 
@@ -31,7 +31,7 @@ Este protótipo foi construído 100% com tecnologias web fundamentais.
 
 <br>
 
-## 🔮 Visão de Futuro e Escalabilidade
+## 🔮 Visão de futuro e escalabilidade
 
 O protótipo atual utiliza simulações (mockups) estáticas criadas manualmente. Essa abordagem foi fundamental para validar a experiência do usuário rapidamente, mas não é escalável.
 
